@@ -12,6 +12,7 @@ import HeroSectionV2 from "@/components/Home/HeroSectionV2";
 import AboutGroup from "@/components/Home/AboutGroup";
 import BranchesLocations from "@/components/Home/BranchesLocations";
 import DepartmentsSection from "@/components/Home/DepartmentsSection";
+import Form from "@/components/contact/Form";
 
 export default function Home() {
   // We no longer need showNightImage for the new navbar design, but we can keep it if other components need it
@@ -36,16 +37,13 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center relative">
       <HeroNavV2 />
-      {/* <HeroNav showNightImage={showNightImage} className={"lg:hidden"} /> */}
       <HeroSectionV2 />
       <AboutGroup />
       <BranchesLocations />
       <DepartmentsSection />
-      {/* <HeroSection /> */}
-      {/* <PrimaryValues /> */}
-      <OurStore />
-      <Products />
       <FeedbackForm />
+      <Form />
+      <div className="w-1/2 h-[1.5px] bg-black/30 mx-auto " />
       <Footer />
     </main>
   );

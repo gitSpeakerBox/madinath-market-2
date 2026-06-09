@@ -7,7 +7,7 @@ const departments = [
   { id: 4, name: "Spices", image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=400&auto=format&fit=crop" },
   { id: 5, name: "Bakery", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop" },
   { id: 6, name: "Poultry", image: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=400&auto=format&fit=crop" },
-  { id: 7, name: "Butchery", image: "https://images.unsplash.com/photo-1603048297172-c92544798d5e?q=80&w=400&auto=format&fit=crop" },
+  { id: 7, name: "Butchery", image: "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?q=80&w=400&auto=format&fit=crop" },
   { id: 8, name: "Frozen Foods", image: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=400&auto=format&fit=crop" },
   { id: 9, name: "Fish", image: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=400&auto=format&fit=crop" },
   { id: 10, name: "Garments", image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=400&auto=format&fit=crop" },
@@ -22,10 +22,10 @@ const DepartmentsSection = () => {
   return (
     <section className="bg-gray-50 py-16 md:py-24 px-4 w-full">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6 md:gap-8">
           {departments.map((dept) => (
-            <div 
-              key={dept.id} 
+            <div
+              key={dept.id}
               className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-gray-100"
             >
               {/* Header */}
@@ -34,12 +34,12 @@ const DepartmentsSection = () => {
                   {dept.name}
                 </h3>
               </div>
-              
+
               {/* Image */}
               <div className="h-48 w-full relative overflow-hidden">
-                <img 
-                  src={dept.image} 
-                  alt={dept.name} 
+                <img
+                  src={dept.image}
+                  alt={dept.name}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>
@@ -49,7 +49,7 @@ const DepartmentsSection = () => {
                 <p className="text-gray-600 text-sm leading-relaxed">
                   It always goes untold that if you get fresh right, you have a tendency to get the rest of the store right.
                 </p>
-                
+
                 <div className="flex justify-end mt-auto">
                   <button className="bg-mm-green hover:bg-[#38803a] text-white text-xs font-medium px-5 py-2 rounded-[6px] transition-colors duration-300">
                     Know More

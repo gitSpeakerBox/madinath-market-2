@@ -30,8 +30,11 @@ const allCards = [
   { icon: exclusiveIcon, title: "Exclusive Discounts", description: "Unbeatable savings on premium products." },
 ];
 
-const HeroSectionV2 = () => {
+const HeroSectionV2 = ({ customImages, hideContent }: { customImages?: any[], hideContent?: boolean }) => {
   const [globalIndex, setGlobalIndex] = useState(0);
+  
+  // Use custom images if provided, otherwise default to home images
+  const displayImages = customImages && customImages.length > 0 ? customImages : images;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,7 +44,7 @@ const HeroSectionV2 = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const currentImageIndex = globalIndex % images.length;
+  const currentImageIndex = globalIndex % displayImages.length;
   
   // Get 4 consecutive cards from the infinite loop of cards
   const visibleCards = Array.from({ length: 4 }).map((_, i) => {
@@ -51,9 +54,9 @@ const HeroSectionV2 = () => {
   return (
     <section className="relative w-full h-screen min-h-[850px] flex flex-col justify-between items-center overflow-hidden">
       {/* Background Images Slider */}
-      <div className="absolute inset-0 w-full h-full -z-10">
+      <div className="absolute inset-0 w-full h-full z-0">
         <AnimatePresence>
-          {images.map((img, index) => (
+          {displayImages.map((img, index) => (
             index === currentImageIndex && (
               <motion.div
                 key={`bg-${index}`}
@@ -79,26 +82,31 @@ const HeroSectionV2 = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col justify-center items-center text-center px-4 z-10 w-full max-w-[800px] mt-24">
-        <h1 className="text-white text-5xl md:text-7xl font-bold tracking-wide drop-shadow-md">
-          More for Less
-        </h1>
-        <h2 className="text-white text-5xl md:text-[80px] font-bold mt-2 drop-shadow-md tracking-wider" style={{ fontFamily: "Caveat, cursive, sans-serif", transform: "rotate(-2deg)" }}>
-          ALWAYS!
-        </h2>
-        
-        <p className="text-white mt-8 text-[15px] md:text-base max-w-[650px] leading-relaxed drop-shadow-sm font-light tracking-wide">
-          At Madinath Group, customers are our top priority. We ensure Food Safety, 
-          Quality, Freshness and exceptional service. Our expert team delivers the highest 
-          quality products at the best prices.
-        </p>
+      {!hideContent && (
+        <div className="flex-1 flex flex-col justify-center items-center text-center px-4 z-10 w-full max-w-[800px] mt-24">
+          <h1 className="text-white text-5xl md:text-7xl font-bold tracking-wide drop-shadow-md">
+            More for Less
+          </h1>
+          <h2 className="text-white text-5xl md:text-[80px] font-bold mt-2 drop-shadow-md tracking-wider" style={{ fontFamily: "Caveat, cursive, sans-serif", transform: "rotate(-2deg)" }}>
+            ALWAYS!
+          </h2>
+          
+          <p className="text-white mt-8 text-[15px] md:text-base max-w-[650px] leading-relaxed drop-shadow-sm font-light tracking-wide">
+            At Madinath Group, customers are our top priority. We ensure Food Safety, 
+            Quality, Freshness and exceptional service. Our expert team delivers the highest 
+            quality products at the best prices.
+          </p>
 
-        <Link href="/stores" className="mt-8">
-          <button className="bg-[#4ba852]/90 hover:bg-[#4ba852] border border-[#4ba852] text-white font-medium py-2.5 px-8 rounded-full transition-all duration-300 hover:scale-105 shadow-lg text-sm tracking-wider">
-            Our Stores
-          </button>
-        </Link>
-      </div>
+          <Link href="/stores" className="mt-8">
+            <button className="bg-[#4ba852]/90 hover:bg-[#4ba852] border border-[#4ba852] text-white font-medium py-2.5 px-8 rounded-full transition-all duration-300 hover:scale-105 shadow-lg text-sm tracking-wider">
+              Our Stores
+            </button>
+          </Link>
+        </div>
+      )}
+
+      {/* Space filler when content is hidden to keep cards at bottom */}
+      {hideContent && <div className="flex-1"></div>}
 
       {/* Value Cards Slider */}
       <div className="w-full max-w-[1100px] px-4 pb-12 z-10">

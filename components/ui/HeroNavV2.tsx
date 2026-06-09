@@ -51,10 +51,12 @@ const HeroNavV2 = ({
           {NavLinks.map((val, idx) =>
             val.subLinks ? (
               <div
-                className="font-medium group relative text-sm capitalize outline-none bg-transparent py-2 px-1 text-gray-800 hover:text-[#D32133] duration-300 cursor-pointer"
+                className="font-medium group relative text-sm capitalize outline-none bg-transparent py-2 px-1 text-gray-800 duration-300 cursor-pointer"
                 key={val.href}
               >
-                {val.title}
+                <Link href={val.href} className="hover:text-[#D32133] transition-colors">
+                  {val.title}
+                </Link>
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -88,7 +90,7 @@ const HeroNavV2 = ({
         {/* Button */}
         <div className="flex items-center">
           <Link href="/contact">
-            <button className="bg-[#D32133] hover:bg-red-700 text-white font-medium py-2 px-6 rounded-[20px] transition-colors duration-300 text-[14px]">
+            <button className="bg-[#D32133] hover:bg-red-700 text-white font-medium py-2 px-6 rounded-[16px] transition-colors duration-300 text-[14px]">
               Contact Us
             </button>
           </Link>
@@ -184,7 +186,13 @@ const MobileMenuBar = ({
               className="font-medium text-lg capitalize outline-none flex flex-col gap-4 bg-transparent w-full"
               key={val.href}
             >
-              <p className="mt-1 font-bold text-gray-800">{val.title}</p>
+              <Link 
+                href={val.href} 
+                className="mt-1 font-bold text-gray-800"
+                onClick={() => setMenuBar(false)}
+              >
+                {val.title}
+              </Link>
               <div className="flex flex-col gap-3 pl-4 border-l-2 border-gray-200 w-full">
                 {val.subLinks.map((subLink) => (
                   <Link

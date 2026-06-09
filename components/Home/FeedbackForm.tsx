@@ -1,20 +1,15 @@
-"use clint";
-import React, { FormEvent, useMemo, useState } from "react";
+"use client";
+import React, { FormEvent, useState, useMemo } from "react";
 import SectionWrapper from "../SectionWrapper";
-import feedbackBg from "@/assets/images/home/feedbackForm.png";
-import feedbackBgMob from "@/assets/images/home/feedbackForm mob.png";
-import feedbackLeaf from "@/assets/images/home/feedbackFormLeaf.png";
-import feedbackTrolly from "@/assets/images/home/feedbackFormTrolly.png";
-import feedbackTrollyMob from "@/assets/images/home/feedbackFormTrolly mob.png";
 import Image from "next/image";
-import Button from "../ui/Button";
+import cartImage from "@/assets/images/cart.svg";
 import { useFormState } from "react-dom";
 import { sendFeedbackForm } from "@/libs/formAction";
 
 const FeedbackForm = () => {
   const [message, formAction] = useFormState(sendFeedbackForm, null);
   const [error, setError] = useState("");
-  const [form, setForm] = useState('Submit now');
+  const [form, setForm] = useState('Send Message');
   const [pending, setPending] = useState(false);
   const [formValue, setFormValue] = useState({
     name: "",
@@ -57,7 +52,7 @@ const FeedbackForm = () => {
         message: "",
       });
       setTimeout(() => {
-        setForm('Submit now')
+        setForm('Send Message')
       }, 5000);
       setPending(false);
     } catch (error) {
@@ -71,128 +66,128 @@ const FeedbackForm = () => {
       });
     }
   };
+
   return (
-    <SectionWrapper className="flex flex-col items-center min-h-[720px] lg:min-h-[490px] justify-center text-[#fff]   lg:h-auto  ">
-      <Image
-        alt=""
-        src={feedbackBg}
-        fill
-        placeholder="blur"
-        blurDataURL={feedbackBg.blurDataURL}
-        className=" object-cover max-lg:hidden -z-10"
-      />
-      <Image
-        alt=""
-        src={feedbackBgMob}
-        fill
-        placeholder="blur"
-        blurDataURL={feedbackBgMob.blurDataURL}
-        className=" object-cover lg:hidden -z-10"
-      />
-      <Image
-        alt=""
-        src={feedbackLeaf}
-        placeholder="blur"
-        blurDataURL={feedbackLeaf.blurDataURL}
-        className=" object-cover absolute left-0 bottom-0 z-50 lg:w-[300.9px] lg:h-[350.87px] w-[174.05px] h-[209.38px]"
-      />
-      <Image
-        alt=""
-        src={feedbackTrolly}
-        placeholder="blur"
-        blurDataURL={feedbackTrolly.blurDataURL}
-        className=" object-cover lg:w-[695px] w-[274px] h-[182px] mx-auto top-5 lg:right-1 lg:h-[460px] absolute  -z-10"
-      />
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-6 lg:px-9 sm:px-12 px-[30px] bg-gradient-to-t from-[#951421] to-[#D32133] max-lg:items-center  rounded-[30px] lg:w-[85%] sm:w-[79%] w-[90%] py-10 lg:pt-8 lg:pb-12"
-      >
-        <h1 className="lg:text-xl text-lg leading-[140%] font-semibold">
-          FEEDBACK FORM
-        </h1>
-        <div className="flex max-lg:flex-col z-[999] gap-6 w-full">
-          <Input
-            className="w-full"
-            id="name"
-            label="First Name*"
-            name="name"
-            required={true}
-            type="text"
-            key={"name"}
-            labelClass=""
-            onChange={handleChange}
-          />
-          <Input
-            className="w-full"
-            id="email"
-            label="Email*"
-            name="email"
-            required={true}
-            type="email"
-            key={"email"}
-            labelClass=""
-            onChange={handleChange}
-          />
-          <Input
-            className="w-full"
-            id="message"
-            label="Your Comment*"
-            name="message"
-            required={false}
-            type="text"
-            key={"message"}
-            labelClass=""
-            onChange={handleChange}
-          />
-          <Button
-            link=""
-            text={`${form}`}
-            className="capitalize max-lg:w-full text-sm lg:py-[6px] py-[10px] px-4 font-medium tracking-[5%] relative w-max h-full text-center"
-            classNameTop="py-0 border max-lg:w-full border-white "
-          />
+    <SectionWrapper className="bg-mm-red py-16 md:py-24 px-4 w-full font-sans text-white">
+      <div className="max-w-6xl mx-auto flex flex-col gap-16">
+        
+        {/* Top Section: Form & Image */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+          
+          {/* Feedback Form */}
+          <div className="w-full lg:w-1/2 flex flex-col">
+            <h2 className="text-2xl md:text-3xl font-bold mb-10 tracking-wide">Feedback Form</h2>
+            
+            <form onSubmit={handleSubmit} className="flex flex-col gap-8 w-full max-w-lg">
+              <div className="flex flex-col md:flex-row gap-8 w-full">
+                <Input
+                  id="name"
+                  label="Name*"
+                  name="name"
+                  required={true}
+                  type="text"
+                  value={formValue.name}
+                  onChange={handleChange}
+                />
+                <Input
+                  id="email"
+                  label="Email*"
+                  name="email"
+                  required={true}
+                  type="email"
+                  value={formValue.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <Input
+                id="message"
+                label="Message"
+                name="message"
+                required={false}
+                type="text"
+                value={formValue.message}
+                onChange={handleChange}
+              />
+              
+              <div className="flex justify-end mt-2">
+                <button 
+                  type="submit" 
+                  disabled={pending}
+                  className="bg-mm-green text-white px-8 py-2.5 rounded-[10px] text-sm font-medium border border-white hover:bg-[#38803a] transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-md"
+                >
+                  {pending ? "Sending..." : form}
+                </button>
+              </div>
+            </form>
+          </div>
+          
+          {/* Cart SVG Image */}
+          <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+             <Image 
+               src={cartImage} 
+               alt="Shopping Cart" 
+               className="w-full max-w-[450px] h-auto object-contain opacity-90"
+               priority
+             />
+          </div>
         </div>
-        <div className="bg-transparent" />
-      </form>
+
+        {/* Bottom Section: Contact Info */}
+        <div className="flex flex-col items-center mt-4">
+          <h3 className="text-2xl font-bold mb-8 tracking-wide">Contact Info</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            <ContactBadge prefix="PB No:" text="69004, Dubai, U.A.E" />
+            <ContactBadge prefix="Tel:" text="+971 4 2643488" />
+            <ContactBadge prefix="Fax:" text="+971 4 2643662" />
+            <ContactBadge prefix="Email:" text="info@madinathgroup.com" />
+          </div>
+        </div>
+        
+      </div>
     </SectionWrapper>
   );
 };
 
+// Input Component
 const Input = ({
-  className,
   type,
   name,
   id,
   label,
   required,
-  labelClass,
+  value,
   onChange,
 }: {
-  className: string;
   type: string;
   name: string;
   id: string;
   label: string;
   required: boolean;
-  labelClass: string;
+  value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
-    <div className={`relative z-0 group   ${className}`}>
+    <div className="relative w-full mb-4">
       <input
         type={type}
         name={name}
         id={id}
-        className={`block py-2.5 px-2 text-black rounded w-full text-xs sm:text-sm  placeholder-mm-red
-         bg-white border-0 border-b-2  appearance-none  focus:outline-none peer ${className}`}
+        value={value}
+        className="block py-2 px-1 w-full text-sm text-white bg-transparent border-0 border-b border-white/60 appearance-none focus:outline-none focus:border-white focus:ring-0 placeholder-white/80 transition-colors duration-300"
         placeholder={label}
         required={required}
         onChange={onChange}
       />
-      {/* <label
-        className={` max-sm:text-sm z[999] duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6  ${labelClass}`}
-      >
-        {label}
-      </label> */}
+    </div>
+  );
+};
+
+// Contact Badge Component
+const ContactBadge = ({ prefix, text }: { prefix: string; text: string }) => {
+  return (
+    <div className="bg-white rounded-[10px] px-6 py-3 shadow-md flex items-center gap-2 transition-transform duration-300 hover:-translate-y-1">
+      <span className="text-mm-green font-bold text-sm">{prefix}</span>
+      <span className="text-gray-800 font-medium text-sm">{text}</span>
     </div>
   );
 };

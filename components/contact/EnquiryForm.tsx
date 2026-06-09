@@ -80,9 +80,9 @@ const EnquiryForm = () => {
     <form
       action=""
       onSubmit={handleSubmit}
-      className="flex w-full flex-col lg:gap-10 sm:gap-7 gap-4"
+      className="flex w-full flex-col lg:gap-8 sm:gap-6 gap-4 mt-4"
     >
-      <div className="flex max-sm:flex-col gap-4 w-full">
+      <div className="flex max-sm:flex-col gap-8 w-full">
         <Input
           onChange={handleChange}
           className="w-full"
@@ -91,8 +91,7 @@ const EnquiryForm = () => {
           name="name"
           required={true}
           type="text"
-          key={"name"}
-          labelClass=""
+          value={formValue.name}
         />
         <Input
           onChange={handleChange}
@@ -100,13 +99,12 @@ const EnquiryForm = () => {
           id="Company"
           label="Company"
           name="company"
-          required={true}
+          required={false}
           type="text"
-          key={"company"}
-          labelClass=""
+          value={formValue.company}
         />
       </div>
-      <div className="flex max-sm:flex-col gap-4 w-full">
+      <div className="flex max-sm:flex-col gap-8 w-full mt-2">
         <Input
           onChange={handleChange}
           className="w-full"
@@ -115,8 +113,7 @@ const EnquiryForm = () => {
           name="email"
           required={true}
           type="email"
-          key={"email"}
-          labelClass=""
+          value={formValue.email}
         />
         <Input
           onChange={handleChange}
@@ -126,31 +123,28 @@ const EnquiryForm = () => {
           name="phone"
           required={true}
           type="tel"
-          key={"phone"}
-          labelClass=""
+          value={formValue.phone}
         />
       </div>
-      <textarea
-        onChange={() => handleChange}
-        name="message"
-        className="h-[100px] w-full p-3 sm:text-sm text-xs lg:text-base  bg-transparent  placeholder-mm-red/50 appearance-none  focus:outline-none border rounded-lg"
-        id=""
-        placeholder="Message"
-      />
+      <div className="mt-2 relative w-full">
+        <textarea
+          onChange={(e) => handleChange(e as any)}
+          name="message"
+          value={formValue.message}
+          className="h-[50px] w-full py-2 text-sm lg:text-base text-gray-800 bg-transparent border-0 border-b border-gray-400 appearance-none focus:outline-none focus:border-mm-green placeholder-gray-600 transition-colors duration-300 resize-none"
+          id="message"
+          placeholder="Message"
+        />
+      </div>
 
-      <div className="flex max-sm:flex-col w-full lg:gap-5 gap-5 sm:gap-3  text-white">
+      <div className="flex justify-end w-full mt-4">
         <button
-          className="rounded w-[50%] outline-none shadow-[inset_0px_0px_20px_rgba(0, 0, 0, 0.25)]  bg-cy-l-blue bg-mm-green py-[10px] font-medium text-white leading-[180%] lg:hover:font-semibold duration-200"
+          className="rounded-[10px] bg-mm-green px-8 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-[#38803a] shadow-md"
           type="submit"
+          disabled={pending}
         >
-          {pending ? "SUBMITTING..." : form}
+          {pending ? "Submitting..." : "Submit Now"}
         </button>
-        {/* <button
-          type="button"
-          className="rounded w-full outline-none bg-cy-l-blue shadow-[inset_0px_0px_20px_rgba(0, 0, 0, 0.25)]  bg-mm-red py-[10px] font-medium text-white leading-[180%] lg:hover:font-semibold duration-200"
-        >
-          CLEAR
-        </button> */}
       </div>
     </form>
   );
@@ -165,25 +159,26 @@ const Input = ({
   id,
   label,
   required,
-  labelClass,
+  value,
   onChange,
 }: {
-  className: string;
+  className?: string;
   type: string;
   name: string;
   id: string;
   label: string;
   required: boolean;
-  labelClass: string;
+  value?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
-    <div className={`relative z-0 group  border rounded-lg  ${className}`}>
+    <div className={`relative w-full ${className}`}>
       <input
         type={type}
         name={name}
         id={id}
-        className="block  w-full sm:text-sm text-xs lg:text-base placeholder:text-sm bg-transparent  placeholder-mm-red/50 appearance-none  focus:outline-none px-3 py-[14px]"
+        value={value}
+        className="block w-full py-2 text-sm lg:text-base text-gray-800 bg-transparent border-0 border-b border-gray-400 appearance-none focus:outline-none focus:border-mm-green placeholder-gray-600 transition-colors duration-300"
         placeholder={label}
         onChange={onChange}
         required={required}

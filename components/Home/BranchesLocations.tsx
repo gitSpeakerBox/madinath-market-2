@@ -153,24 +153,23 @@ const BranchesLocations = () => {
                 ))}
               </div>
             </div>
-            
-            {/* Custom styled track for scrollbar (Visual effect) */}
-            <div className="w-2 bg-white/20 rounded-[10px] h-[300px] hidden sm:block overflow-hidden relative">
-              <div 
-                className="w-full bg-white rounded-[10px] absolute transition-all duration-300"
-                style={{
-                  height: '30%',
-                  top: `${((activeBranchId - 1) / branches.length) * 70}%`
-                }}
-              />
-            </div>
           </div>
         </div>
       </div>
       <style dangerouslySetInnerHTML={{__html: `
         .custom-scrollbar::-webkit-scrollbar {
-          width: 0px;
-          background: transparent;
+          width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #ffffff;
+          border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.8);
         }
       `}} />
     </section>
