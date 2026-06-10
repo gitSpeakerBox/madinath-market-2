@@ -5,7 +5,6 @@ export const contactInfo = defineType({
   title: "Contact Info",
   type: "document",
   // Singleton — only one document of this type should exist
-  __experimental_actions: ["update", "publish"],
   fields: [
     defineField({
       name: "poBox",
