@@ -28,7 +28,7 @@ const Form = () => {
             Get In Touch
           </h1>
           <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s.
           </p>
         </div>
 

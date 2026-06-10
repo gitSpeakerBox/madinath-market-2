@@ -21,7 +21,7 @@ export default function NotFound() {
       </h3>
 
       <p className="text-gray-500 max-w-[500px] mb-8 text-sm md:text-base leading-relaxed">
-        We can't seem to find the page you're looking for. It might have been
+        We can&apos;t seem to find the page you&apos;re looking for. It might have been
         removed, had its name changed, or is temporarily unavailable.
       </p>
 

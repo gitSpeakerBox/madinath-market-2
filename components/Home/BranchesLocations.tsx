@@ -93,7 +93,7 @@ const BranchesLocations = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Branches & Locations</h2>
           <p className="text-white/80 text-sm md:text-base leading-relaxed mb-8 max-w-lg">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry's standard dummy text ever since the 1500s.
+            has been the industry&apos;s standard dummy text ever since the 1500s.
           </p>
 
           {/* Tabs */}

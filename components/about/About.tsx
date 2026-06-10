@@ -38,7 +38,7 @@ const About = () => {
                 <p>
                   From a humble, yet confident beginning, Madinath Group grew in size as well as in
                   reputation. It steps with the success of UAE. With tremendous experience and impeccable
-                  qualifications in the supermarket field, the promoters could consolidate Madinath Group's
+                  qualifications in the supermarket field, the promoters could consolidate Madinath Group&apos;s
                   stature as one of the most progressive business group in the region.
                 </p>
               </div>
@@ -100,7 +100,7 @@ const About = () => {
                 <h3 className="text-mm-red font-bold text-lg">Our Vision</h3>
               </div>
               <div className="p-6 text-white text-sm leading-relaxed">
-                UAE's value price retailer of choice!! Enhancing customer
+                UAE&apos;s value price retailer of choice!! Enhancing customer
                 experience and delivering quality products.
               </div>
             </div>

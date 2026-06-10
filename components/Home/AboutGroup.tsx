@@ -33,7 +33,7 @@ const AboutGroup = () => {
             <p>
               From a humble, yet confident beginning, Madinath Group grew in size as well as in
               reputation. It steps with the success of UAE. With tremendous experience and impeccable
-              qualifications in the supermarket field, the promoters could consolidate Madinath Group's
+              qualifications in the supermarket field, the promoters could consolidate Madinath Group&apos;s
               stature as one of the most progressive business group in the region.
             </p>
             <button className="bg-mm-green hover:bg-mm-red text-white transition-all duration-300 px-8 py-3 rounded-[12px] font-medium hover:-translate-y-0.5 active:translate-y-0 self-start sm:self-auto">
