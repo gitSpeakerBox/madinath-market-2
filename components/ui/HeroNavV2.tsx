@@ -90,7 +90,7 @@ const HeroNavV2 = ({
         {/* Button */}
         <div className="flex items-center">
           <Link href="/contact">
-            <button className="bg-[#D32133] hover:bg-red-700 text-white font-medium py-2 px-6 rounded-[16px] transition-colors duration-300 text-[14px]">
+            <button className="bg-[#D32133] hover:bg-red-700 text-white font-medium py-2 px-6 rounded-[12px] transition-colors duration-300 text-[14px]">
               Contact Us
             </button>
           </Link>

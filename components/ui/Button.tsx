@@ -17,21 +17,21 @@ const Button = ({
   return link ? (
     <Link
       href={link}
-      className={`lg:bg-mm-red bg-mm-green text-white  z-10 p-0 rounded-[5px]  ${classNameTop}`}
+      className={`lg:bg-mm-red bg-mm-green text-white  z-10 p-0 rounded-[12px]  ${classNameTop}`}
     >
       <button
-        className={`btn btn_animation max-lg:shadow[inset_0px_0px_19.9836px_rgba(0, 0, 0, 0.25)] rounded-[5px] z-20 ${className}`}
+        className={`btn btn_animation max-lg:shadow[inset_0px_0px_19.9836px_rgba(0, 0, 0, 0.25)] rounded-[12px] z-20 ${className}`}
       >
         {text}
       </button>
     </Link>
   ) : (
     <div
-      className={`lg:bg-mm-red bg-mm-green text-white z-10 p-0 rounded-[5px]  ${classNameTop}`}
+      className={`lg:bg-mm-red bg-mm-green text-white z-10 p-0 rounded-[12px]  ${classNameTop}`}
     >
       <button
         type={text === "Submit now"||text === "SUBMIT" ? "submit" : "button"}
-        className={`btn btn_animation max-lg:shadow[inset_0px_0px_19.9836px_rgba(0, 0, 0, 0.25)] rounded-[5px] z-20 ${className}`}
+        className={`btn btn_animation max-lg:shadow[inset_0px_0px_19.9836px_rgba(0, 0, 0, 0.25)] rounded-[12px] z-20 ${className}`}
       >
         {text}
       </button>

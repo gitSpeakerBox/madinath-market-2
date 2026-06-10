@@ -1,16 +1,36 @@
-import Image from 'next/image'
-import React from 'react'
-import contact from '@/assets/images/contact us.png'
-import Form from '@/components/contact/Form'
-import Layout from '@/components/Layout'
+"use client";
+import React from 'react';
+import HeroNavV2 from "@/components/ui/HeroNavV2";
+import Footer from "@/components/ui/Footer";
+import HeroSectionV2 from "@/components/Home/HeroSectionV2";
+import Form from '@/components/contact/Form';
+import FeedbackForm from '@/components/Home/FeedbackForm';
+import contactHeroImg from '@/assets/images/contact us.png';
+
+// Simulated Sanity Data
+const sanityDummyData = {
+  heroSection: {
+    images: [contactHeroImg]
+  }
+};
 
 const page = () => {
   return (
-    <Layout>
-        <Image className='w-full lg:h-screen object-cover' src={contact} alt=''/>
-        <Form/>
-    </Layout>
-  )
-}
+    <main className="flex min-h-screen flex-col items-center relative bg-white">
+      <HeroNavV2 />
 
-export default page
+      {/* Hero Section */}
+      <HeroSectionV2 customImages={sanityDummyData.heroSection.images} hideContent={true} />
+
+      {/* Contact Form Section */}
+      <Form />
+
+      {/* Feedback Form / Info Section */}
+      <FeedbackForm />
+
+      <Footer />
+    </main>
+  );
+};
+
+export default page;

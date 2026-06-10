@@ -1,63 +1,30 @@
-export const NavLinks = [
+type SubLink = {
+  title: string;
+  href: string;
+};
+
+type NavLink = {
+  title: string;
+  href: string;
+  subLinks?: SubLink[];
+};
+
+export const NavLinks: NavLink[] = [
   {
     title: "About us",
     href: "/about",
-    subLinks: [
-      {
-        title: "Profile",
-        href: "/Profile",
-      },
-      {
-        title: "About the Group",
-        href: "/about",
-      },
-      {
-        title: "Quality Policy",
-        href: "/quality",
-      },
-    ],
   },
   {
     title: "News & Events",
     href: "/ournews",
   },
   {
-    title: "Careers",
-    href: "/career",
+    title: "Gallery",
+    href: "/gallery",
   },
   {
-    title: "Services",
-    href: "/",
-    subLinks: [
-      {
-        title: "Fresh Products",
-        href: "/fresh-products",
-      },
-      {
-        title: "Bakery Products",
-        href: "/bakery-products",
-      },
-      {
-        title: "Sea Foods",
-        href: "/sea-food",
-      },
-      {
-        title: "Meat & Poultry",
-        href: "/meat-poultry",
-      },
-      {
-        title: "Provision",
-        href: "/provision",
-      },
-      {
-        title: "Home Appliances",
-        href: "/home-appliances",
-      },
-      {
-        title: "Foot Wears & Garments",
-        href: "/footwears-garments",
-      },
-    ],
+    title: "Careers",
+    href: "/career",
   },
   {
     title: "Our Stores",

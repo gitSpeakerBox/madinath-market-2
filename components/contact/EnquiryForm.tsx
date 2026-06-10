@@ -49,7 +49,8 @@ const EnquiryForm = () => {
     setError("");
     setPending(true);
     try {
-      const data = await formAction(new FormData(e.currentTarget));
+      const formData = new FormData(e.currentTarget);
+      await sendForm(null, formData);
       (e.target as HTMLFormElement).reset();
       setPending(false);
       setFormValue({
@@ -58,22 +59,15 @@ const EnquiryForm = () => {
         phone: "",
         company: "",
         message: "",
-        });
-        setForm('SUBMITTED')
-        setTimeout(() => {
-          setForm('SUBMIT')
-        }, 5000);
+      });
+      setForm('SUBMITTED');
+      setTimeout(() => {
+        setForm('SUBMIT');
+      }, 5000);
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {
       setPending(false);
-      setFormValue({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        message: "",
-      });
     }
   };
   return (
@@ -139,11 +133,11 @@ const EnquiryForm = () => {
 
       <div className="flex justify-end w-full mt-4">
         <button
-          className="rounded-[10px] bg-mm-green px-8 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-[#38803a] shadow-md"
+          className="rounded-[12px] bg-mm-green px-8 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-[#38803a] shadow-md"
           type="submit"
           disabled={pending}
         >
-          {pending ? "Submitting..." : "Submit Now"}
+          {pending ? "Submitting..." : form === 'SUBMITTED' ? "Sent!" : "Submit Now"}
         </button>
       </div>
     </form>

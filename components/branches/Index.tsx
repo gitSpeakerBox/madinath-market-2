@@ -1,6 +1,5 @@
 import React from "react";
 import SectionWrapper from "../SectionWrapper";
-import Image from "next/image";
 import BranchCard from "./BranchCard";
 import {
   ourBranchesData,
@@ -9,25 +8,43 @@ import {
 
 const Index = () => {
   return (
-    <SectionWrapper className="grid grid-cols-1 gap-14 " classNameTop="py-10">
-      <h1 className="text-[32px] font-semibold leading-[180%] text-mm-red">
-        Branches
-      </h1>
-      <h1 className="text-[28px] text-center font-medium leading-[200%] text-black">
-        In UAE
-      </h1>
-      <div className="grid lg:grid-cols-3 sm:grid-cols-2 max-lg:place-items-center  gap-x-5 gap-y-10 place-content-center place-items-center">
-        {ourBranchesData.map((val, idx) => (
-          <BranchCard key={idx + 929345} data={val} />
-        ))}
-      </div>
-      <h1 className="text-[28px] text-center font-medium leading-[200%] text-black">
-        In INDIA
-      </h1>
-      <div className="flex max-sm:flex-col items-center justify-center lg:gap-x-10 sm:gap-x-6 gap-y-10">
-        {ourBranchesDataInd.map((val, idx) => (
-          <BranchCard key={idx + 929345} data={val} />
-        ))}
+    <SectionWrapper className="w-full py-16 md:py-24 font-sans px-4">
+      <div className="max-w-7xl mx-auto flex flex-col gap-12">
+        
+        {/* Header */}
+        <div className="flex flex-col gap-4 max-w-2xl">
+          <h1 className="font-bold text-3xl md:text-5xl text-mm-red tracking-tight">
+            Our Stores
+          </h1>
+          <p className="text-gray-800 text-sm md:text-base leading-relaxed">
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.
+          </p>
+        </div>
+
+        {/* UAE Section */}
+        <div className="flex flex-col gap-6 pt-4">
+          <div className="border border-mm-red px-8 py-2 font-bold text-gray-900 w-max bg-white shadow-sm text-sm tracking-wider">
+            IN UAE
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+            {ourBranchesData.map((val, idx) => (
+              <BranchCard key={idx} data={val} />
+            ))}
+          </div>
+        </div>
+
+        {/* INDIA Section */}
+        <div className="flex flex-col gap-6 pt-12">
+          <div className="border border-mm-red px-8 py-2 font-bold text-gray-900 w-max bg-white shadow-sm text-sm tracking-wider">
+            IN INDIA
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+            {ourBranchesDataInd.map((val, idx) => (
+              <BranchCard key={idx} data={val} />
+            ))}
+          </div>
+        </div>
+
       </div>
     </SectionWrapper>
   );

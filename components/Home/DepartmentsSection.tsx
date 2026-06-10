@@ -51,7 +51,7 @@ const DepartmentsSection = () => {
                 </p>
 
                 <div className="flex justify-end mt-auto">
-                  <button className="bg-mm-green hover:bg-[#38803a] text-white text-xs font-medium px-5 py-2 rounded-[6px] transition-colors duration-300">
+                  <button className="bg-mm-green hover:bg-[#38803a] text-white text-xs font-medium px-5 py-2 rounded-[12px] transition-colors duration-300">
                     Know More
                   </button>
                 </div>

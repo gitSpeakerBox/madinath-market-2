@@ -43,16 +43,17 @@ const FeedbackForm = () => {
     setError("");
     setPending(true);
     try {
-      const data = await formAction(new FormData(e.currentTarget));
+      const formData = new FormData(e.currentTarget);
+      await sendFeedbackForm(null, formData);
       (e.target as HTMLFormElement).reset();  
-      setForm('Submitted')
+      setForm('Submitted');
       setFormValue({
         name: "",
         email: "",
         message: "",
       });
       setTimeout(() => {
-        setForm('Send Message')
+        setForm('Send Message');
       }, 5000);
       setPending(false);
     } catch (error) {
@@ -113,7 +114,7 @@ const FeedbackForm = () => {
                 <button 
                   type="submit" 
                   disabled={pending}
-                  className="bg-mm-green text-white px-8 py-2.5 rounded-[10px] text-sm font-medium border border-white hover:bg-[#38803a] transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-md"
+                  className="bg-mm-green text-white px-8 py-2.5 rounded-[12px] text-sm font-medium border border-white hover:bg-[#38803a] transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-md"
                 >
                   {pending ? "Sending..." : form}
                 </button>
@@ -136,10 +137,10 @@ const FeedbackForm = () => {
         <div className="flex flex-col items-center mt-4">
           <h3 className="text-2xl font-bold mb-8 tracking-wide">Contact Info</h3>
           <div className="flex flex-wrap justify-center gap-4">
-            <ContactBadge prefix="PB No:" text="69004, Dubai, U.A.E" />
-            <ContactBadge prefix="Tel:" text="+971 4 2643488" />
-            <ContactBadge prefix="Fax:" text="+971 4 2643662" />
-            <ContactBadge prefix="Email:" text="info@madinathgroup.com" />
+            <ContactBadge prefix="PB No:" text="69004, Dubai, U.A.E" href="https://www.google.com/maps/search/?api=1&query=Madinath+Group+69004+Dubai" />
+            <ContactBadge prefix="Tel:" text="+971 4 2643488" href="tel:+97142643488" />
+            <ContactBadge prefix="Fax:" text="+971 4 2643662" href="tel:+97142643662" />
+            <ContactBadge prefix="Email:" text="info@madinathgroup.com" href="mailto:info@madinathgroup.com" />
           </div>
         </div>
         
@@ -183,12 +184,12 @@ const Input = ({
 };
 
 // Contact Badge Component
-const ContactBadge = ({ prefix, text }: { prefix: string; text: string }) => {
+const ContactBadge = ({ prefix, text, href }: { prefix: string; text: string; href: string }) => {
   return (
-    <div className="bg-white rounded-[10px] px-6 py-3 shadow-md flex items-center gap-2 transition-transform duration-300 hover:-translate-y-1">
+    <a href={href} target={href.startsWith("http") ? "_blank" : "_self"} rel="noopener noreferrer" className="bg-white rounded-[12px] px-6 py-3 shadow-md flex items-center gap-2 transition-transform duration-300 hover:-translate-y-1">
       <span className="text-mm-green font-bold text-sm">{prefix}</span>
-      <span className="text-gray-800 font-medium text-sm">{text}</span>
-    </div>
+      <span className="text-gray-800 font-medium text-sm hover:text-mm-red transition-colors">{text}</span>
+    </a>
   );
 };
 

@@ -52,7 +52,7 @@ const HeroSectionV2 = ({ customImages, hideContent }: { customImages?: any[], hi
   });
 
   return (
-    <section className="relative w-full h-screen min-h-[850px] flex flex-col justify-between items-center overflow-hidden">
+    <section className="relative w-full h-auto md:h-screen min-h-[100dvh] md:min-h-[850px] flex flex-col justify-between items-center overflow-hidden pt-24 pb-8 md:py-0">
       {/* Background Images Slider */}
       <div className="absolute inset-0 w-full h-full z-0">
         <AnimatePresence>
@@ -83,22 +83,22 @@ const HeroSectionV2 = ({ customImages, hideContent }: { customImages?: any[], hi
 
       {/* Main Content */}
       {!hideContent && (
-        <div className="flex-1 flex flex-col justify-center items-center text-center px-4 z-10 w-full max-w-[800px] mt-24">
-          <h1 className="text-white text-5xl md:text-7xl font-bold tracking-wide drop-shadow-md">
+        <div className="flex-1 flex flex-col justify-center items-center text-center px-4 z-10 w-full max-w-[800px] mt-10 md:mt-24 mb-10 md:mb-0">
+          <h1 className="text-white text-4xl sm:text-5xl md:text-7xl font-bold tracking-wide drop-shadow-md">
             More for Less
           </h1>
-          <h2 className="text-white text-5xl md:text-[80px] font-bold mt-2 drop-shadow-md tracking-wider" style={{ fontFamily: "Caveat, cursive, sans-serif", transform: "rotate(-2deg)" }}>
+          <h2 className="text-white text-4xl sm:text-5xl md:text-[80px] font-bold mt-2 drop-shadow-md tracking-wider" style={{ fontFamily: "Caveat, cursive, sans-serif", transform: "rotate(-2deg)" }}>
             ALWAYS!
           </h2>
           
-          <p className="text-white mt-8 text-[15px] md:text-base max-w-[650px] leading-relaxed drop-shadow-sm font-light tracking-wide">
+          <p className="text-white mt-6 md:mt-8 text-[14px] md:text-base max-w-[650px] leading-relaxed drop-shadow-sm font-light tracking-wide">
             At Madinath Group, customers are our top priority. We ensure Food Safety, 
             Quality, Freshness and exceptional service. Our expert team delivers the highest 
             quality products at the best prices.
           </p>
 
-          <Link href="/stores" className="mt-8">
-            <button className="bg-[#4ba852]/90 hover:bg-[#4ba852] border border-[#4ba852] text-white font-medium py-2.5 px-8 rounded-full transition-all duration-300 hover:scale-105 shadow-lg text-sm tracking-wider">
+          <Link href="/stores" className="mt-6 md:mt-8">
+            <button className="bg-[#4ba852]/90 hover:bg-[#4ba852] border border-[#4ba852] text-white font-medium py-2.5 px-6 md:px-8 rounded-[12px] transition-all duration-300 hover:scale-105 shadow-lg text-sm tracking-wider">
               Our Stores
             </button>
           </Link>
@@ -109,8 +109,8 @@ const HeroSectionV2 = ({ customImages, hideContent }: { customImages?: any[], hi
       {hideContent && <div className="flex-1"></div>}
 
       {/* Value Cards Slider */}
-      <div className="w-full max-w-[1100px] px-4 pb-12 z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <div className="w-full max-w-[1100px] px-4 pb-6 md:pb-12 z-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           <AnimatePresence mode="wait">
             {visibleCards.map((card, index) => (
               <motion.div 
@@ -119,15 +119,15 @@ const HeroSectionV2 = ({ customImages, hideContent }: { customImages?: any[], hi
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-[20px] p-6 flex flex-col items-center text-center shadow-lg transform transition-transform hover:-translate-y-1"
+                className="bg-white rounded-[16px] md:rounded-[20px] p-4 md:p-6 flex flex-col items-center text-center shadow-lg transform transition-transform hover:-translate-y-1"
               >
-                <div className="mb-4">
-                  <Image src={card.icon} alt={card.title} width={45} height={45} className="object-contain h-[45px]"/>
+                <div className="mb-2 md:mb-4">
+                  <Image src={card.icon} alt={card.title} width={45} height={45} className="object-contain h-[35px] md:h-[45px] w-auto"/>
                 </div>
-                <h3 className="text-[#a51c24] font-semibold text-lg mb-2 tracking-wide">
+                <h3 className="text-[#a51c24] font-semibold text-sm md:text-lg mb-1 md:mb-2 tracking-wide">
                   {card.title}
                 </h3>
-                <p className="text-black/80 text-[13px] leading-snug max-w-[180px]">
+                <p className="text-black/80 text-[11px] md:text-[13px] leading-snug max-w-[180px]">
                   {card.description}
                 </p>
               </motion.div>

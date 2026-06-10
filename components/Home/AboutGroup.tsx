@@ -36,8 +36,8 @@ const AboutGroup = () => {
               qualifications in the supermarket field, the promoters could consolidate Madinath Group's
               stature as one of the most progressive business group in the region.
             </p>
-            <button className="bg-mm-green hover:bg-mm-red text-white transition-all duration-300 px-8 py-3 rounded-xl font-medium hover:-translate-y-0.5 active:translate-y-0 self-start sm:self-auto">
-              Know More
+            <button className="bg-mm-green hover:bg-mm-red text-white transition-all duration-300 px-8 py-3 rounded-[12px] font-medium hover:-translate-y-0.5 active:translate-y-0 self-start sm:self-auto">
+              Read More
             </button>
 
           </div>
