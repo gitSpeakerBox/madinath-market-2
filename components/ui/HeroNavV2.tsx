@@ -37,7 +37,7 @@ const HeroNavV2 = ({
   return (
     <>
       <nav
-        className={`bg-white text-black py-4 absolute top-0 left-0 flex items-center justify-between px-6 lg:px-16 z-50 w-full shadow-sm ${className} max-lg:hidden`}
+        className={`bg-transparent text-white py-7 absolute top-0 left-0 flex items-center justify-between px-6 lg:px-16 z-50 w-full ${className} max-lg:hidden`}
       >
         {/* Logo */}
         <div className="flex items-center">
@@ -51,7 +51,7 @@ const HeroNavV2 = ({
           {NavLinks.map((val, idx) =>
             val.subLinks ? (
               <div
-                className="font-medium group relative text-sm capitalize outline-none bg-transparent py-2 px-1 text-gray-800 duration-300 cursor-pointer"
+                className="font-medium group relative text-sm capitalize outline-none bg-transparent py-2 px-1 text-white duration-300 cursor-pointer"
                 key={val.href}
               >
                 <Link href={val.href} className="hover:text-[#D32133] transition-colors">
@@ -77,7 +77,7 @@ const HeroNavV2 = ({
               </div>
             ) : (
               <Link
-                className="font-medium text-[15px] capitalize outline-none bg-transparent py-2 px-1 text-gray-800 hover:text-[#D32133] duration-300"
+                className="font-medium text-[15px] capitalize outline-none bg-transparent py-2 px-1 text-white hover:text-[#D32133] duration-300"
                 key={val.href}
                 href={val.href}
               >
@@ -101,7 +101,7 @@ const HeroNavV2 = ({
       <motion.nav
         className={`py-4 ${className} ${
           menuBar ? "" : "px-5"
-        } absolute flex items-center lg:hidden justify-between z-50 w-full bg-white top-0 shadow-sm`}
+        } absolute flex items-center lg:hidden justify-between z-50 w-full bg-transparent top-0`}
       >
         <Link href="/">
           <Logo className="w-[120px] h-auto" />

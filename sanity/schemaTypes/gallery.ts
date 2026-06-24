@@ -1,0 +1,62 @@
+import { defineField, defineType } from "sanity";
+
+export const gallery = defineType({
+  name: "gallery",
+  title: "Gallery",
+  type: "document",
+  fields: [
+    defineField({
+      name: "title",
+      title: "Image Title",
+      type: "string",
+      description: "Internal label or caption for this image",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "image",
+      title: "Gallery Image",
+      type: "image",
+      options: { hotspot: true },
+      validation: (Rule) => Rule.required(),
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+          description: "Describe the image for accessibility",
+        }),
+      ],
+    }),
+    defineField({
+      name: "order",
+      title: "Display Order",
+      type: "number",
+      description: "Lower numbers appear first",
+      initialValue: 1,
+    }),
+    defineField({
+      name: "isActive",
+      title: "Active",
+      type: "boolean",
+      description: "Uncheck to hide this image without deleting it",
+      initialValue: true,
+    }),
+  ],
+  orderings: [
+    {
+      title: "Display Order",
+      name: "orderAsc",
+      by: [{ field: "order", direction: "asc" }],
+    },
+  ],
+  preview: {
+    select: {
+      title: "title",
+      media: "image",
+      order: "order",
+    },
+    prepare({ title, media, order }) {
+      return { title: `#${order} \u2013 ${title}`, media };
+    },
+  },
+});

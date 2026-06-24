@@ -6,10 +6,10 @@ const About = () => {
     <>
       <SectionWrapper className="w-full pt-16 md:pt-24 font-sans bg-white px-4 mt-20">
         <div className="max-w-7xl mx-auto flex flex-col gap-16">
-          
+
           {/* Top Two Columns: Logo Motion Video & About Text + 45-year Video */}
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-            
+
             {/* Left Column: Logo Motion Video */}
             <div className="w-full lg:w-1/2 flex justify-center">
               <video
@@ -29,7 +29,7 @@ const About = () => {
               </h1>
               <div className="text-gray-700 text-sm md:text-base leading-relaxed space-y-4">
                 <p>
-                  Madinath Group was established in 1981 to fulfil the market needs for high quality retail
+                  Madinath Group was established in 1982 to fulfil the market needs for high quality retail
                   solutions. From the rarest foods to the freshest produce, we constantly look for the finest
                   items specially chosen for our customers. Madinath has positioned itself strategically as a
                   leader in the regional retail sector by improving operational efficiency. Our greatest value
@@ -42,7 +42,7 @@ const About = () => {
                   stature as one of the most progressive business group in the region.
                 </p>
               </div>
-              
+
               <div className="mt-4 max-w-[200px]">
                 <video
                   src="/videos/45-year.mp4"
@@ -75,12 +75,12 @@ const About = () => {
 
         </div>
       </SectionWrapper>
-      
+
       {/* Red Mission & Vision Section - Full Width */}
       <div className="w-full bg-mm-red">
         <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="flex flex-col md:flex-row gap-8 justify-center">
-            
+
             {/* Our Mission */}
             <div className="flex-1 max-w-[500px] border border-white/40 rounded-xl overflow-hidden bg-transparent">
               <div className="bg-white py-3 px-6">

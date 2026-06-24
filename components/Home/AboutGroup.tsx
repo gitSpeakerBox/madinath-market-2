@@ -24,7 +24,7 @@ const AboutGroup = () => {
           </h2>
           <div className="text-gray-700 space-y-6 text-sm md:text-base leading-relaxed text-justify">
             <p>
-              Madinath Group was established in 1981 to fulfil the market needs for high quality retail
+              Madinath Group was established in 1982 to fulfil the market needs for high quality retail
               solutions. From the rarest foods to the freshest produce, we constantly look for the finest
               items specially chosen for our customers. Madinath has positioned itself strategically as a
               leader in the regional retail sector by improving operational efficiency. Our greatest value

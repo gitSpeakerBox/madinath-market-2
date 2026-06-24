@@ -37,10 +37,10 @@ export async function getHeroSlides() {
   );
 }
 
-/** Fetch branches, optionally filtered by country ("UAE" | "INDIA") */
-export async function getBranches(country?: string) {
-  const filter = country
-    ? `*[_type == "branch" && isActive == true && country == $country]`
+/** Fetch branches, optionally filtered by country */
+export async function getBranches(countryName?: string) {
+  const filter = countryName
+    ? `*[_type == "branch" && isActive == true && country->name == $countryName]`
     : `*[_type == "branch" && isActive == true]`;
 
   return client.fetch(
@@ -48,13 +48,16 @@ export async function getBranches(country?: string) {
       _id,
       name,
       type,
-      country,
+      "country": country->name,
       phone,
       address,
       mapEmbedUrl,
+      normalMapLink,
+      instagramLink,
+      "offersPdf": offersPdf.asset->url,
       image { asset, alt }
     }`,
-    country ? { country } : {}
+    countryName ? { countryName } : {}
   );
 }
 
@@ -102,6 +105,29 @@ export async function getContactInfo() {
       workingHours,
       mapEmbedUrl,
       socialLinks
+    }`
+  );
+}
+
+/** Fetch all active gallery images */
+export async function getGalleryImages() {
+  return client.fetch(
+    `*[_type == "gallery" && isActive == true] | order(order asc) {
+      _id,
+      title,
+      image { asset, alt }
+    }`
+  );
+}
+
+/** Fetch all active sub brands */
+export async function getSubBrands() {
+  return client.fetch(
+    `*[_type == "subBrand" && isActive == true] | order(order asc) {
+      _id,
+      title,
+      link,
+      logo { asset, alt }
     }`
   );
 }

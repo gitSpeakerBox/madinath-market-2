@@ -1,32 +1,27 @@
-"use client";
-import React from 'react';
+import type { Metadata } from "next";
+import React from "react";
 import HeroNavV2 from "@/components/ui/HeroNavV2";
 import Footer from "@/components/ui/Footer";
-import HeroSectionV2 from "@/components/Home/HeroSectionV2";
-import heroImg from '@/assets/images/branches/hero.png';
-import Index from '@/components/branches/Index';
+import Index from "@/components/branches/Index";
+import { getBranches } from "@/sanity/sanityClient";
 
-// Simulated Sanity Data
-const sanityDummyData = {
-  heroSection: {
-    images: [heroImg]
-  }
+export const metadata: Metadata = {
+  title: "Our Branches | Madinath Group",
+  description: "Find the nearest Madinath Group store in your area. We have multiple branches strategically located across different regions to serve you better.",
 };
 
-const page = () => {
+const BranchesPage = async () => {
+  const branches = await getBranches();
+
   return (
-    <main className="flex min-h-screen flex-col items-center relative bg-white">
+    <main className="flex min-h-screen flex-col items-center relative">
       <HeroNavV2 />
-
-      {/* Hero Section */}
-      <HeroSectionV2 customImages={sanityDummyData.heroSection.images} hideContent={true} />
-
-      {/* Branches Content */}
-      <Index />
-
+      <div className="w-full pt-20"> {/* Add padding for the fixed navbar if needed */}
+        <Index branches={branches} />
+      </div>
       <Footer />
     </main>
   );
 };
 
-export default page;
+export default BranchesPage;

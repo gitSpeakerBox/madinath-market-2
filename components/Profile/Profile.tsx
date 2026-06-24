@@ -13,7 +13,7 @@ const Profile = () => {
           Profile
         </h1>
         <p className=" text-sm lg:text-lg leading-[200%] max-w-[972px]">
-          Established in 1981, we have shaped and built our business on our
+          Established in 1982, we have shaped and built our business on our
           founding principles of providing a variety of affordable, quality
           brands and products as well as excellent and superior service to our
           customers. Our formats include convenience stores, supermarkets and

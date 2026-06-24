@@ -6,6 +6,11 @@
   user-select: none;
   -webkit-user-drag: none;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
 .main_padding_x {
   padding-left: 16px;
   padding-right: 16px;

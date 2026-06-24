@@ -29,15 +29,8 @@ export const branch = defineType({
     defineField({
       name: "country",
       title: "Country",
-      type: "string",
-      options: {
-        list: [
-          { title: "UAE", value: "UAE" },
-          { title: "India", value: "INDIA" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "UAE",
+      type: "reference",
+      to: [{ type: "country" }],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -53,9 +46,30 @@ export const branch = defineType({
     }),
     defineField({
       name: "mapEmbedUrl",
-      title: "Google Maps Embed URL",
+      title: "Google Maps Embed URL or Iframe",
+      type: "text",
+      description: "Paste the full iframe code from Google Maps or just the src URL.",
+    }),
+    defineField({
+      name: "normalMapLink",
+      title: "Normal Map Link",
       type: "url",
-      description: "Paste the full iframe src URL from Google Maps",
+      description: "Link to open Google Maps directly (e.g., https://maps.app.goo.gl/...)",
+    }),
+    defineField({
+      name: "instagramLink",
+      title: "Instagram Link",
+      type: "url",
+      description: "Separate Instagram link for this specific branch",
+    }),
+    defineField({
+      name: "offersPdf",
+      title: "Offers PDF",
+      type: "file",
+      description: "Upload a PDF with offers for this branch (can have multiple pages)",
+      options: {
+        accept: "application/pdf",
+      },
     }),
     defineField({
       name: "image",

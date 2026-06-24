@@ -9,6 +9,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
 export default defineConfig({
   name: "madinath-market",
   title: "Madinath Market",
+  basePath: "/admin",
   projectId,
   dataset,
   plugins: [
@@ -42,6 +43,16 @@ export default defineConfig({
               .title("Products")
               .schemaType("product")
               .child(S.documentTypeList("product").title("Products")),
+            // Gallery
+            S.listItem()
+              .title("Gallery")
+              .schemaType("gallery")
+              .child(S.documentTypeList("gallery").title("Gallery Images")),
+            // Sub Brands
+            S.listItem()
+              .title("Sub Brands")
+              .schemaType("subBrand")
+              .child(S.documentTypeList("subBrand").title("Sub Brands")),
           ]),
     }),
     visionTool(),

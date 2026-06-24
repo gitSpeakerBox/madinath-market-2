@@ -1,48 +1,40 @@
-"use client";
+import type { Metadata } from "next";
 import FeedbackForm from "@/components/Home/FeedbackForm";
-import HeroSection from "@/components/Home/HeroSection";
-import OurStore from "@/components/Home/OurStore";
-import PrimaryValues from "@/components/Home/PrimaryValues";
-import Products from "@/components/Home/Products";
-import "./globals.css";
-import Footer from "@/components/ui/Footer";
-import HeroNavV2 from "@/components/ui/HeroNavV2";
-import { useEffect, useState } from "react";
 import HeroSectionV2 from "@/components/Home/HeroSectionV2";
 import AboutGroup from "@/components/Home/AboutGroup";
 import BranchesLocations from "@/components/Home/BranchesLocations";
 import DepartmentsSection from "@/components/Home/DepartmentsSection";
 import Form from "@/components/contact/Form";
+import Footer from "@/components/ui/Footer";
+import HeroNavV2 from "@/components/ui/HeroNavV2";
+import OurBrands from "@/components/Home/OurBrands";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+import { getSubBrands, getBranches } from "@/sanity/sanityClient";
+import "./globals.css";
 
-export default function Home() {
-  // We no longer need showNightImage for the new navbar design, but we can keep it if other components need it
-  const [showNightImage, setShowNightImage] = useState(false);
+export const metadata: Metadata = {
+  title: "Madinath Group | Hypermarkets, Supermarkets & Mall in UAE",
+  description:
+    "Welcome to Madinath Group — UAE's leading retail destination since 1982. Discover fresh produce, groceries, garments, electronics and more at our Hypermarkets, Supermarkets & Mall across Dubai. More for Less, Always!",
+  alternates: {
+    canonical: "https://www.madinathgroup.com",
+  },
+};
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 30) {
-        setShowNightImage(true);
-      } else {
-        setShowNightImage(false);
-      }
-    };
+export default async function Home() {
+  const brands = await getSubBrands();
+  const branches = await getBranches();
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
   return (
     <main className="flex min-h-screen flex-col items-center relative">
       <HeroNavV2 />
       <HeroSectionV2 />
-      <AboutGroup />
-      <BranchesLocations />
-      <DepartmentsSection />
-      <FeedbackForm />
-      <Form />
+      <ScrollReveal><AboutGroup /></ScrollReveal>
+      <ScrollReveal><BranchesLocations branches={branches} /></ScrollReveal>
+      <ScrollReveal><DepartmentsSection /></ScrollReveal>
+      <ScrollReveal><OurBrands brands={brands} /></ScrollReveal>
+      <ScrollReveal><FeedbackForm /></ScrollReveal>
+      <ScrollReveal><Form /></ScrollReveal>
       <div className="w-1/2 h-[1.5px] bg-black/30 mx-auto " />
       <Footer />
     </main>

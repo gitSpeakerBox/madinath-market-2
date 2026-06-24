@@ -11,15 +11,15 @@ const OurStore = () => {
       <div className=" z-50 h-full w-full flex max-lg:flex-col max-lg:justify-end  lg:items-end justify-center ">
         <div className="lg:flex items-center gap-[14px] lg:gap-[60px]  ">
 
-        <h1 className="text-[#D32133] font-semibold text-[20px] lg:text-5xl leading-[140%]">
-          Our Store
-        </h1>
-        <p className="lg:text-lg text-sm leading-[130%] text-white max-w-[544px] font-extralight">
-          Established in 1981, we have shaped and built our business on our
-          founding principles of providing a variety of affordable, quality
-          brands and products as well as excellent and superior service to our
-          customers.{" "}
-        </p>
+          <h1 className="text-[#D32133] font-semibold text-[20px] lg:text-5xl leading-[140%]">
+            Our Store
+          </h1>
+          <p className="lg:text-lg text-sm leading-[130%] text-white max-w-[544px] font-extralight">
+            Established in 1982, we have shaped and built our business on our
+            founding principles of providing a variety of affordable, quality
+            brands and products as well as excellent and superior service to our
+            customers.{" "}
+          </p>
         </div>
       </div>
     </SectionWrapper>
