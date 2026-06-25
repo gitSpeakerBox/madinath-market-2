@@ -4,7 +4,7 @@ import Image, { StaticImageData } from "next/image";
 interface BranchCardProps {
   data: {
     heading: string;
-    image?: StaticImageData;
+    image?: StaticImageData | string;
     points: string[];
   };
 }

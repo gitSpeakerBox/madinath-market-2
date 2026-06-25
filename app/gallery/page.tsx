@@ -6,6 +6,7 @@ import Footer from "@/components/ui/Footer";
 import HeroSectionV2 from "@/components/Home/HeroSectionV2";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { getGalleryImages, getPageHero, urlFor } from "@/sanity/sanityClient";
+import HeroImg from "@/assets/images/home/hero/img-1.png";
 
 export const metadata: Metadata = {
   title: "Gallery",
