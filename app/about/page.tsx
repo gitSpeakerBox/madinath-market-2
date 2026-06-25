@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import About from "@/components/about/About";
 import React from "react";
-import aboutImg1 from "@/assets/images/about.jpg";
-import aboutImg2 from "@/assets/images/about-2.jpg";
-import aboutImg3 from "@/assets/images/about-3.jpg";
 import HeroNavV2 from "@/components/ui/HeroNavV2";
 import Footer from "@/components/ui/Footer";
 import HeroSectionV2 from "@/components/Home/HeroSectionV2";
 import OurBrands from "@/components/Home/OurBrands";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { getSubBrands } from "@/sanity/sanityClient";
+import { getSubBrands, getPageHero, getAboutPage, urlFor } from "@/sanity/sanityClient";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -23,9 +20,7 @@ export const metadata: Metadata = {
     "Madinath mission vision",
     "retail leader UAE since 1982",
   ],
-  alternates: {
-    canonical: "https://www.madinathgroup.com/about",
-  },
+  alternates: { canonical: "https://www.madinathgroup.com/about" },
   openGraph: {
     title: "About Madinath Group | UAE's Trusted Retail Leader Since 1982",
     description:
@@ -34,38 +29,38 @@ export const metadata: Metadata = {
   },
 };
 
-// Simulated Sanity CMS Data
-// Once Sanity is connected, you will fetch this data and map the asset URLs.
-const sanityDummyData = {
-  pageTitle: "About Us",
-  heroSection: {
-    images: [
-      aboutImg1, // Will be replaced by Sanity URL e.g., urlFor(image).url()
-      aboutImg2,
-      aboutImg3,
-    ],
-  },
-};
+export const dynamic = "force-dynamic";
 
 const page = async () => {
-  const brands = await getSubBrands();
+  const [brands, pageHero, aboutData] = await Promise.all([
+    getSubBrands(),
+    getPageHero("about"),
+    getAboutPage(),
+  ]);
+
+  const heroImages = pageHero?.slides
+    ?.filter((s: any) => s?.image?.asset)
+    .map((s: any) => urlFor(s.image).url());
+
+  const firstSlide = pageHero?.slides?.[0];
+  const pageTitle = firstSlide?.title;
+  const pageSubtitle = firstSlide?.subtitle;
 
   return (
     <main className="flex min-h-screen flex-col items-center relative">
       <HeroNavV2 />
-
-      {/* Hero Section (Reused from Home, fed with Sanity Dummy Data) */}
-      <HeroSectionV2 customImages={sanityDummyData.heroSection.images} hideContent={true} />
-
-      {/* About Section */}
-      <ScrollReveal><About /></ScrollReveal>
-
-      {/* Brands Section */}
+      <HeroSectionV2
+        customImages={heroImages}
+        hideContent={true}
+        pageTitle={pageTitle}
+        pageSubtitle={pageSubtitle}
+      />
+      <ScrollReveal><About aboutData={aboutData} /></ScrollReveal>
       <ScrollReveal><OurBrands brands={brands} /></ScrollReveal>
-
       <Footer />
     </main>
   );
 };
 
 export default page;
+

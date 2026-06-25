@@ -10,7 +10,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true, // Set to false for fresh data in server components
+  useCdn: false, // Set to false for fresh data in server components
 });
 
 // Image URL helper
@@ -83,13 +83,30 @@ export async function getAllProducts() {
     `*[_type == "product" && isActive == true] | order(order asc) {
       _id,
       title,
-      slug,
+      "slug": slug.current,
       category,
       description,
       buttonLabel,
       buttonLink,
       image { asset, alt }
     }`
+  );
+}
+
+/** Fetch a single product by slug */
+export async function getProductBySlug(slug: string) {
+  return client.fetch(
+    `*[_type == "product" && slug.current == $slug && isActive == true][0] {
+      _id,
+      title,
+      "slug": slug.current,
+      category,
+      description,
+      content,
+      image { asset, alt },
+      detailImage { asset, alt }
+    }`,
+    { slug }
   );
 }
 
@@ -128,6 +145,82 @@ export async function getSubBrands() {
       title,
       link,
       logo { asset, alt }
+    }`
+  );
+}
+
+/** Fetch the hero slider for a specific page (e.g. "about", "news") */
+export async function getPageHero(page: string) {
+  return client.fetch(
+    `*[_type == "pageHero" && page == $page][0] {
+      page,
+      slides[] {
+        image { asset, alt },
+        title,
+        subtitle
+      }
+    }`,
+    { page }
+  );
+}
+
+/** Fetch all active news articles */
+export async function getAllNews() {
+  return client.fetch(
+    `*[_type == "news" && isActive == true] | order(publishedAt desc) {
+      _id,
+      title,
+      "slug": slug.current,
+      publishedAt,
+      description,
+      image { asset, alt }
+    }`
+  );
+}
+
+/** Fetch a single news article by slug */
+export async function getNewsBySlug(slug: string) {
+  return client.fetch(
+    `*[_type == "news" && slug.current == $slug && isActive == true][0] {
+      _id,
+      title,
+      "slug": slug.current,
+      publishedAt,
+      description,
+      content,
+      image { asset, alt }
+    }`,
+    { slug }
+  );
+}
+
+/** Fetch all active career listings */
+export async function getCareers() {
+  return client.fetch(
+    `*[_type == "career" && isActive == true] | order(order asc) {
+      _id,
+      title,
+      location,
+      experience,
+      education,
+      linkedinUrl
+    }`
+  );
+}
+
+/** Fetch the singleton about page settings */
+export async function getAboutPage() {
+  return client.fetch(
+    `*[_type == "aboutPage"][0] {
+      stats[] {
+        "iconUrl": icon.asset->url,
+        count,
+        suffix,
+        label
+      },
+      "aboutVideoUrl": aboutVideo.asset->url,
+      mission,
+      vision
     }`
   );
 }

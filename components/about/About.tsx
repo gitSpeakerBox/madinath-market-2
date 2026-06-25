@@ -1,7 +1,30 @@
 import React from "react";
+import Image from "next/image";
 import SectionWrapper from "../SectionWrapper";
+import CountUp from "@/components/ui/CountUp";
 
-const About = () => {
+const defaultStats = [
+  { count: 50, suffix: "+", label: "Outlets", iconUrl: "" },
+  { count: 45, suffix: "+", label: "Years", iconUrl: "" },
+  { count: 10000, suffix: "+", label: "Products", iconUrl: "" },
+  { count: 500, suffix: "+", label: "Staff", iconUrl: "" },
+];
+
+interface AboutProps {
+  aboutData?: {
+    stats?: { count: number; suffix?: string; label: string; iconUrl?: string }[];
+    aboutVideoUrl?: string;
+    mission?: string;
+    vision?: string;
+  } | null;
+}
+
+const About = ({ aboutData }: AboutProps) => {
+  const stats = aboutData?.stats?.length ? aboutData.stats : defaultStats;
+  const mission = aboutData?.mission || "Create a chain of superstores in strategic locations delivering quality, value, service and variety, with convenient opening hours providing our customers with the comfortable shopping experience.";
+  const vision = aboutData?.vision || "UAE's value price retailer of choice!! Enhancing customer experience and delivering quality products.";
+  const videoSrc = aboutData?.aboutVideoUrl || "/videos/45-year.mp4";
+
   return (
     <>
       <SectionWrapper className="w-full pt-16 md:pt-24 font-sans bg-white px-4 mt-20">
@@ -18,7 +41,7 @@ const About = () => {
                 loop
                 muted
                 playsInline
-                className="w-full max-w-md object-contain"
+                className="w-full max-w-md object-contain rounded-2xl shadow-sm"
               />
             </div>
 
@@ -27,7 +50,7 @@ const About = () => {
               <h1 className="text-3xl md:text-4xl font-bold text-mm-red tracking-tight">
                 About the Group
               </h1>
-              <div className="text-gray-700 text-sm md:text-base leading-relaxed space-y-4">
+              <div className="text-gray-700 text-sm md:text-base leading-relaxed space-y-4 font-light">
                 <p>
                   Madinath Group was established in 1982 to fulfil the market needs for high quality retail
                   solutions. From the rarest foods to the freshest produce, we constantly look for the finest
@@ -44,30 +67,56 @@ const About = () => {
               </div>
 
               <div className="mt-4 max-w-[200px]">
-                <video
-                  src="/videos/45-year.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full object-contain"
-                />
+                {videoSrc.match(/\.(jpeg|jpg|gif|png|svg|webp)$/i) ? (
+                  <Image
+                    src={videoSrc}
+                    alt="45 Years Badge"
+                    width={200}
+                    height={100}
+                    className="w-full object-contain"
+                  />
+                ) : (
+                  <video
+                    src={videoSrc}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full object-contain"
+                  />
+                )}
               </div>
             </div>
           </div>
 
-          {/* Outlets Row */}
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 pt-8 pb-12">
-            {[1, 2, 3, 4].map((_, index) => (
-              <div key={index} className="flex items-center gap-3">
-                {/* Store Icon */}
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mm-green">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-mm-red">50+</span>
-                  <span className="text-sm font-medium text-gray-700 uppercase">Outlets</span>
+          {/* Counting Stats Row - Highly responsive grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-8 pb-12">
+            {stats.map((stat: any, index: number) => (
+              <div 
+                key={index} 
+                className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 md:p-6 bg-slate-50/50 hover:bg-slate-50 border border-slate-100 rounded-2xl transition-all duration-300 hover:shadow-md"
+              >
+                {/* Icon Container with subtle circle overlay */}
+                <div className="w-14 h-14 rounded-full bg-mm-red/5 flex items-center justify-center shrink-0">
+                  {stat.iconUrl ? (
+                    <img
+                      src={stat.iconUrl}
+                      alt={stat.label}
+                      className="w-8 h-8 object-contain"
+                    />
+                  ) : (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mm-green">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                  )}
+                </div>
+                
+                <div className="flex flex-col items-center sm:items-start text-center sm:text-left justify-center min-h-[56px]">
+                  <span className="text-3xl md:text-4xl font-extrabold text-mm-red tracking-tight leading-none mb-1">
+                    <CountUp target={stat.count} suffix={stat.suffix || ""} />
+                  </span>
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{stat.label}</span>
                 </div>
               </div>
             ))}
@@ -79,29 +128,25 @@ const About = () => {
       {/* Red Mission & Vision Section - Full Width */}
       <div className="w-full bg-mm-red">
         <div className="max-w-7xl mx-auto px-4 py-16">
-          <div className="flex flex-col md:flex-row gap-8 justify-center">
+          <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch">
 
             {/* Our Mission */}
-            <div className="flex-1 max-w-[500px] border border-white/40 rounded-xl overflow-hidden bg-transparent">
-              <div className="bg-white py-3 px-6">
-                <h3 className="text-mm-red font-bold text-lg">Our Mission</h3>
+            <div className="flex-1 max-w-[500px] border border-white/20 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-sm flex flex-col">
+              <div className="bg-white py-4 px-6 border-b border-white/10">
+                <h3 className="text-mm-red font-bold text-xl tracking-tight">Our Mission</h3>
               </div>
-              <div className="p-6 text-white text-sm leading-relaxed">
-                Create a chain of superstores in strategic locations
-                delivering quality, value, service and variety, with
-                convenient opening hours providing our customers with
-                the comfortable shopping experience.
+              <div className="p-6 text-white/90 text-[14px] leading-relaxed font-light flex-1">
+                {mission}
               </div>
             </div>
 
             {/* Our Vision */}
-            <div className="flex-1 max-w-[500px] border border-white/40 rounded-xl overflow-hidden bg-transparent">
-              <div className="bg-white py-3 px-6">
-                <h3 className="text-mm-red font-bold text-lg">Our Vision</h3>
+            <div className="flex-1 max-w-[500px] border border-white/20 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-sm flex flex-col">
+              <div className="bg-white py-4 px-6 border-b border-white/10">
+                <h3 className="text-mm-red font-bold text-xl tracking-tight">Our Vision</h3>
               </div>
-              <div className="p-6 text-white text-sm leading-relaxed">
-                UAE&apos;s value price retailer of choice!! Enhancing customer
-                experience and delivering quality products.
+              <div className="p-6 text-white/90 text-[14px] leading-relaxed font-light flex-1">
+                {vision}
               </div>
             </div>
 

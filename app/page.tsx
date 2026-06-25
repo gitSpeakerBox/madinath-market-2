@@ -9,7 +9,7 @@ import Footer from "@/components/ui/Footer";
 import HeroNavV2 from "@/components/ui/HeroNavV2";
 import OurBrands from "@/components/Home/OurBrands";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { getSubBrands, getBranches } from "@/sanity/sanityClient";
+import { getSubBrands, getBranches, getHeroSlides, getAllProducts, urlFor } from "@/sanity/sanityClient";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,17 +21,26 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const brands = await getSubBrands();
   const branches = await getBranches();
+  const heroSlides = await getHeroSlides();
+  const products = await getAllProducts();
+
+  // Extract URLs from sanity images
+  const sanityHeroImages = heroSlides
+    ?.filter((slide: any) => slide?.image?.asset)
+    .map((slide: any) => urlFor(slide.image).url());
 
   return (
     <main className="flex min-h-screen flex-col items-center relative">
-      <HeroNavV2 />
-      <HeroSectionV2 />
+      <HeroNavV2 isTransparent={true} />
+      <HeroSectionV2 customImages={sanityHeroImages} />
       <ScrollReveal><AboutGroup /></ScrollReveal>
       <ScrollReveal><BranchesLocations branches={branches} /></ScrollReveal>
-      <ScrollReveal><DepartmentsSection /></ScrollReveal>
+      <ScrollReveal><DepartmentsSection products={products} /></ScrollReveal>
       <ScrollReveal><OurBrands brands={brands} /></ScrollReveal>
       <ScrollReveal><FeedbackForm /></ScrollReveal>
       <ScrollReveal><Form /></ScrollReveal>

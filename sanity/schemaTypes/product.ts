@@ -19,26 +19,8 @@ export const product = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "category",
-      title: "Category",
-      type: "string",
-      options: {
-        list: [
-          { title: "Grocery", value: "grocery" },
-          { title: "Fresh Produce", value: "fresh-produce" },
-          { title: "Bakery", value: "bakery" },
-          { title: "Dairy", value: "dairy" },
-          { title: "Meat & Seafood", value: "meat-seafood" },
-          { title: "Beverages", value: "beverages" },
-          { title: "Snacks", value: "snacks" },
-          { title: "Household", value: "household" },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: "image",
-      title: "Product Image",
+      title: "Thumbnail Image (Home Page)",
       type: "image",
       options: { hotspot: true },
       validation: (Rule) => Rule.required(),
@@ -51,10 +33,32 @@ export const product = defineType({
       ],
     }),
     defineField({
+      name: "detailImage",
+      title: "Detail Page Image (Inner Page)",
+      type: "image",
+      options: { hotspot: true },
+      description: "This image will be shown on the individual product page.",
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
       name: "description",
-      title: "Description",
+      title: "Short Description",
       type: "text",
       rows: 3,
+      description: "Brief summary shown on cards.",
+    }),
+    defineField({
+      name: "content",
+      title: "Page Content",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Detailed content for the product's individual page.",
     }),
     defineField({
       name: "featured",

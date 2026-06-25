@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import React from "react";
 import Image from "next/image";
-import HeroImg from "@/assets/images/gallery.jpg";
 import HeroNavV2 from "@/components/ui/HeroNavV2";
 import Footer from "@/components/ui/Footer";
 import HeroSectionV2 from "@/components/Home/HeroSectionV2";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { getGalleryImages, urlFor } from "@/sanity/sanityClient";
+import { getGalleryImages, getPageHero, urlFor } from "@/sanity/sanityClient";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -20,9 +19,7 @@ export const metadata: Metadata = {
     "Madinath store photos",
     "UAE retail gallery",
   ],
-  alternates: {
-    canonical: "https://www.madinathgroup.com/gallery",
-  },
+  alternates: { canonical: "https://www.madinathgroup.com/gallery" },
   openGraph: {
     title: "Gallery | Madinath Group",
     description:
@@ -31,23 +28,29 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 60; // Revalidate every 60 seconds
-
-const sanityDummyData = {
-  heroSection: {
-    images: [HeroImg],
-  },
-};
+export const dynamic = "force-dynamic";
 
 export default async function GalleryPage() {
-  const galleryImages = await getGalleryImages();
+  const [galleryImages, pageHero] = await Promise.all([
+    getGalleryImages(),
+    getPageHero("gallery"),
+  ]);
+
+  const heroImages = pageHero?.slides
+    ?.filter((s: any) => s?.image?.asset)
+    .map((s: any) => urlFor(s.image).url());
+
+  const firstSlide = pageHero?.slides?.[0];
 
   return (
     <main className="flex min-h-screen flex-col items-center relative">
       <HeroNavV2 />
-
-      {/* Hero Section */}
-      <HeroSectionV2 customImages={sanityDummyData.heroSection.images} hideContent={true} />
+      <HeroSectionV2
+        customImages={heroImages}
+        hideContent={true}
+        pageTitle={firstSlide?.title}
+        pageSubtitle={firstSlide?.subtitle}
+      />
 
       {/* Gallery Content */}
       <ScrollReveal>

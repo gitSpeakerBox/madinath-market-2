@@ -30,33 +30,40 @@ const allCards = [
   { icon: exclusiveIcon, title: "Exclusive Discounts", description: "Unbeatable savings on premium products." },
 ];
 
-const HeroSectionV2 = ({ customImages, hideContent }: { customImages?: any[], hideContent?: boolean }) => {
+interface HeroSectionV2Props {
+  customImages?: any[];
+  hideContent?: boolean;
+  pageTitle?: string;
+  pageSubtitle?: string;
+}
+
+const HeroSectionV2 = ({ customImages, hideContent, pageTitle, pageSubtitle }: HeroSectionV2Props) => {
   const [globalIndex, setGlobalIndex] = useState(0);
-  
+
   // Use custom images if provided, otherwise default to home images
   const displayImages = customImages && customImages.length > 0 ? customImages : images;
 
   useEffect(() => {
     const interval = setInterval(() => {
       setGlobalIndex((prevIndex) => prevIndex + 1);
-    }, 5000); // 5 seconds per tick
-
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   const currentImageIndex = globalIndex % displayImages.length;
-  
-  // Get 4 consecutive cards from the infinite loop of cards
-  const visibleCards = Array.from({ length: 4 }).map((_, i) => {
-    return allCards[(globalIndex + i) % allCards.length];
-  });
+
+  // Cycle 4 cards per tick
+  const visibleCards = Array.from({ length: 4 }).map((_, i) =>
+    allCards[(globalIndex + i) % allCards.length]
+  );
 
   return (
-    <section className="relative w-full h-auto md:h-screen min-h-[100dvh] md:min-h-[850px] flex flex-col justify-between items-center overflow-hidden pt-24 pb-8 md:py-0">
-      {/* Background Images Slider */}
+    <section className="relative w-full min-h-[100dvh] md:min-h-[850px] flex flex-col overflow-hidden">
+
+      {/* ── Background Image Slider ── */}
       <div className="absolute inset-0 w-full h-full z-0">
         <AnimatePresence>
-          {displayImages.map((img, index) => (
+          {displayImages.map((img, index) =>
             index === currentImageIndex && (
               <motion.div
                 key={`bg-${index}`}
@@ -75,29 +82,30 @@ const HeroSectionV2 = ({ customImages, hideContent }: { customImages?: any[], hi
                 />
               </motion.div>
             )
-          ))}
+          )}
         </AnimatePresence>
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/20"></div>
+        {/* Darker overlay on inner pages so title text is readable */}
+        <div className={`absolute inset-0 ${hideContent ? "bg-black/50" : "bg-black/30"}`} />
       </div>
 
-      {/* Main Content */}
+      {/* ── HOME PAGE: "More for Less" marketing text ── */}
       {!hideContent && (
-        <div className="flex-1 flex flex-col justify-center items-center text-center px-4 z-10 w-full max-w-[800px] mt-10 md:mt-24 mb-10 md:mb-0">
+        <div className="flex-1 flex flex-col justify-center items-center text-center px-4 z-10 w-full max-w-[800px] mx-auto mt-24 mb-6">
           <h1 className="text-white text-4xl sm:text-5xl md:text-7xl font-bold tracking-wide drop-shadow-md">
             More for Less
           </h1>
-          <h2 className="text-white text-4xl sm:text-5xl md:text-[80px] font-bold mt-2 drop-shadow-md tracking-wider" style={{ fontFamily: "Caveat, cursive, sans-serif", transform: "rotate(-2deg)" }}>
+          <h2
+            className="text-white text-4xl sm:text-5xl md:text-[80px] font-bold mt-2 drop-shadow-md tracking-wider"
+            style={{ fontFamily: "Caveat, cursive, sans-serif", transform: "rotate(-2deg)" }}
+          >
             ALWAYS!
           </h2>
-          
           <p className="text-white mt-6 md:mt-8 text-[14px] md:text-base max-w-[650px] leading-relaxed drop-shadow-sm font-light tracking-wide">
-            At Madinath Group, customers are our top priority. We ensure Food Safety, 
-            Quality, Freshness and exceptional service. Our expert team delivers the highest 
+            At Madinath Group, customers are our top priority. We ensure Food Safety,
+            Quality, Freshness and exceptional service. Our expert team delivers the highest
             quality products at the best prices.
           </p>
-
-          <Link href="/stores" className="mt-6 md:mt-8">
+          <Link href="/branches" className="mt-6 md:mt-8">
             <button className="bg-[#4ba852]/90 hover:bg-[#4ba852] border border-[#4ba852] text-white font-medium py-2.5 px-6 md:px-8 rounded-[12px] transition-all duration-300 hover:scale-105 shadow-lg text-sm tracking-wider">
               Our Stores
             </button>
@@ -105,15 +113,38 @@ const HeroSectionV2 = ({ customImages, hideContent }: { customImages?: any[], hi
         </div>
       )}
 
-      {/* Space filler when content is hidden to keep cards at bottom */}
-      {hideContent && <div className="flex-1"></div>}
+      {/* ── INNER PAGES: Optional title/subtitle from Sanity, centered ── */}
+      {hideContent && (
+        <div className="flex-1 flex flex-col justify-center items-center text-center px-4 z-10 w-full">
+          {pageTitle && (
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="text-white text-4xl sm:text-5xl md:text-7xl font-bold tracking-wide drop-shadow-lg"
+            >
+              {pageTitle}
+            </motion.h1>
+          )}
+          {pageSubtitle && (
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-white/90 mt-4 text-base md:text-xl max-w-[600px] leading-relaxed drop-shadow-sm font-light"
+            >
+              {pageSubtitle}
+            </motion.p>
+          )}
+        </div>
+      )}
 
-      {/* Value Cards Slider */}
-      <div className="w-full max-w-[1100px] px-4 pb-6 md:pb-12 z-10">
+      {/* ── VALUE CARDS — shown on EVERY page at the bottom ── */}
+      <div className="w-full max-w-[1100px] mx-auto px-4 pb-6 md:pb-12 z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           <AnimatePresence mode="wait">
             {visibleCards.map((card, index) => (
-              <motion.div 
+              <motion.div
                 key={`${globalIndex}-${card.title}`}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -122,7 +153,7 @@ const HeroSectionV2 = ({ customImages, hideContent }: { customImages?: any[], hi
                 className="bg-white rounded-[16px] md:rounded-[20px] p-4 md:p-6 flex flex-col items-center text-center shadow-lg transform transition-transform hover:-translate-y-1"
               >
                 <div className="mb-2 md:mb-4">
-                  <Image src={card.icon} alt={card.title} width={45} height={45} className="object-contain h-[35px] md:h-[45px] w-auto"/>
+                  <Image src={card.icon} alt={card.title} width={45} height={45} className="object-contain h-[35px] md:h-[45px] w-auto" />
                 </div>
                 <h3 className="text-[#a51c24] font-semibold text-sm md:text-lg mb-1 md:mb-2 tracking-wide">
                   {card.title}
@@ -135,6 +166,7 @@ const HeroSectionV2 = ({ customImages, hideContent }: { customImages?: any[], hi
           </AnimatePresence>
         </div>
       </div>
+
     </section>
   );
 };

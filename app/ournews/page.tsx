@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import OurNews from "@/components/OurNews/OurNews";
 import React from "react";
-import HeroImg from "@/assets/images/OurNews/OurNews.jpg";
 import HeroNavV2 from "@/components/ui/HeroNavV2";
 import Footer from "@/components/ui/Footer";
 import HeroSectionV2 from "@/components/Home/HeroSectionV2";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { getPageHero, getAllNews, urlFor } from "@/sanity/sanityClient";
+import OurNewsSection from "@/components/OurNews/OurNews";
 
 export const metadata: Metadata = {
   title: "Our News & Updates",
@@ -20,9 +20,7 @@ export const metadata: Metadata = {
     "Dubai retail news",
     "Madinath seasonal offers",
   ],
-  alternates: {
-    canonical: "https://www.madinathgroup.com/ournews",
-  },
+  alternates: { canonical: "https://www.madinathgroup.com/ournews" },
   openGraph: {
     title: "News & Updates | Madinath Group",
     description:
@@ -31,24 +29,30 @@ export const metadata: Metadata = {
   },
 };
 
-// Simulated Sanity Data
-const sanityDummyData = {
-  heroSection: {
-    images: [HeroImg], // Would be dynamic from CMS
-  },
-};
+export const dynamic = "force-dynamic";
 
-const page = () => {
+const page = async () => {
+  const [pageHero, news] = await Promise.all([
+    getPageHero("news"),
+    getAllNews(),
+  ]);
+
+  const heroImages = pageHero?.slides
+    ?.filter((s: any) => s?.image?.asset)
+    .map((s: any) => urlFor(s.image).url());
+
+  const firstSlide = pageHero?.slides?.[0];
+
   return (
     <main className="flex min-h-screen flex-col items-center relative">
       <HeroNavV2 />
-
-      {/* Hero Section */}
-      <HeroSectionV2 customImages={sanityDummyData.heroSection.images} hideContent={true} />
-
-      {/* News Content */}
-      <ScrollReveal><OurNews /></ScrollReveal>
-
+      <HeroSectionV2
+        customImages={heroImages}
+        hideContent={true}
+        pageTitle={firstSlide?.title}
+        pageSubtitle={firstSlide?.subtitle}
+      />
+      <ScrollReveal><OurNewsSection news={news} /></ScrollReveal>
       <Footer />
     </main>
   );

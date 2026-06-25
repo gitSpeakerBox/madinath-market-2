@@ -10,13 +10,15 @@ export const metadata: Metadata = {
   description: "Find the nearest Madinath Group store in your area. We have multiple branches strategically located across different regions to serve you better.",
 };
 
+export const dynamic = "force-dynamic";
+
 const BranchesPage = async () => {
   const branches = await getBranches();
 
   return (
     <main className="flex min-h-screen flex-col items-center relative">
       <HeroNavV2 />
-      <div className="w-full pt-20"> {/* Add padding for the fixed navbar if needed */}
+      <div className="w-full">
         <Index branches={branches} />
       </div>
       <Footer />

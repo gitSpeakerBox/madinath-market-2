@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 
 const HeroNavV2 = ({
   className,
+  isTransparent = false,
 }: {
   className?: string;
+  isTransparent?: boolean;
 }) => {
   type SubLink = {
     title: string;
@@ -37,7 +39,7 @@ const HeroNavV2 = ({
   return (
     <>
       <nav
-        className={`bg-transparent text-white py-7 absolute top-0 left-0 flex items-center justify-between px-6 lg:px-16 z-50 w-full ${className} max-lg:hidden`}
+        className={`${isTransparent ? "bg-transparent text-white absolute" : "bg-white text-black relative shadow-sm"} py-7 top-0 left-0 flex items-center justify-between px-6 lg:px-16 z-50 w-full ${className} max-lg:hidden`}
       >
         {/* Logo */}
         <div className="flex items-center">
@@ -51,7 +53,7 @@ const HeroNavV2 = ({
           {NavLinks.map((val, idx) =>
             val.subLinks ? (
               <div
-                className="font-medium group relative text-sm capitalize outline-none bg-transparent py-2 px-1 text-white duration-300 cursor-pointer"
+                className={`font-medium group relative text-sm capitalize outline-none bg-transparent py-2 px-1 ${isTransparent ? "text-white" : "text-gray-800"} duration-300 cursor-pointer`}
                 key={val.href}
               >
                 <Link href={val.href} className="hover:text-[#D32133] transition-colors">
@@ -77,7 +79,7 @@ const HeroNavV2 = ({
               </div>
             ) : (
               <Link
-                className="font-medium text-[15px] capitalize outline-none bg-transparent py-2 px-1 text-white hover:text-[#D32133] duration-300"
+                className={`font-medium text-[15px] capitalize outline-none bg-transparent py-2 px-1 ${isTransparent ? "text-white" : "text-gray-800"} hover:text-[#D32133] duration-300`}
                 key={val.href}
                 href={val.href}
               >
@@ -101,7 +103,7 @@ const HeroNavV2 = ({
       <motion.nav
         className={`py-4 ${className} ${
           menuBar ? "" : "px-5"
-        } absolute flex items-center lg:hidden justify-between z-50 w-full bg-transparent top-0`}
+        } ${isTransparent ? "absolute bg-transparent" : "relative bg-white shadow-sm"} flex items-center lg:hidden justify-between z-50 w-full top-0`}
       >
         <Link href="/">
           <Logo className="w-[120px] h-auto" />
@@ -124,7 +126,7 @@ const HeroNavV2 = ({
             strokeLinejoin="round"
           />
           <path
-            d="M7.73077 14.4808C7.60326 14.4808 7.48098 14.4302 7.39081 14.34C7.30065 14.2499 7.25 14.1276 7.25 14.0001C7.25 13.8725 7.30065 13.7503 7.39081 13.6601C7.48098 13.5699 7.60326 13.5193 7.73077 13.5193M7.73077 14.4808C7.85828 14.4808 7.98056 14.4302 8.07072 14.34C8.16089 14.2499 8.21154 14.1276 8.21154 14.0001C8.21154 13.8725 8.16089 13.7503 8.07072 13.6601C7.98056 13.5699 7.85828 13.5193 7.73077 13.5193M13.5 14.4808C13.3725 14.4808 13.2502 14.4302 13.16 14.34C13.0699 14.2499 13.0192 14.1276 13.0192 14.0001C13.0192 13.8725 13.0699 13.7503 13.16 13.6601C13.2502 13.5699 13.3725 13.5193 13.5 13.5193M13.5 14.4808C13.6275 14.4808 13.7498 14.4302 13.84 14.34C13.9301 14.2499 13.9808 14.1276 13.9808 14.0001C13.9808 13.8725 13.9301 13.7503 13.84 13.6601C13.7498 13.5699 13.6275 13.5193 13.5 13.5193M19.2692 14.4808C19.1417 14.4808 19.0194 14.4302 18.9293 14.34C18.8391 14.2499 18.7885 14.1276 18.7885 14.0001C18.7885 13.8725 18.8391 13.7503 18.9293 13.6601C19.0194 13.5699 19.1417 13.5193 19.2692 13.5193M19.2692 14.4808C19.3967 14.4808 19.519 14.4302 19.6092 14.34C19.6993 14.2499 19.75 14.1276 19.75 14.0001C19.75 13.8725 19.6993 13.7503 19.6092 13.6601C19.519 13.5699 19.3967 13.5193 19.2692 13.5193"
+            d="M7.73077 14.4808C7.60326 14.4808 7.48098 14.4302 7.39081 14.34C7.30065 14.2499 7.25 14.1276 7.25 14.0001C7.25 13.8725 7.30065 13.7503 7.39081 13.6601C7.48098 13.5699 7.60326 13.5193 7.73077 13.5193M7.73077 14.4808C7.85828 14.4808 7.98056 14.4302 8.07072 14.34C8.16089 14.2499 8.21154 14.1276 8.21154 14.0001C8.21154 13.8725 8.16089 13.7503 8.07072 13.6601C7.98056 13.5699 7.85828 13.5193 7.73077 13.5193M13.5 14.4808C13.3725 14.4808 13.2502 14.4302 13.16 14.34C13.0699 14.2499 13.0192 14.1276 13.0192 14.0001C13.0192 13.8725 13.0699 13.7503 13.16 13.6601C13.2502 13.5699 13.3725 13.5193 13.5 13.5193M13.5 14.4808C13.6275 14.4808 13.7498 14.4302 13.84 14.34C13.9301 14.2499 13.9808 14.1276 13.9808 14.0001C13.9808 13.8725 13.9301 13.7503 13.84 13.6601C13.7498 13.5699 13.6275 13.5193 13.5 13.5193M19.2692 14.4808C19.1417 14.4808 19.0194 14.4302 19.2693 14.34C18.8391 14.2499 18.7885 14.1276 18.7885 14.0001C18.7885 13.8725 18.8391 13.7503 18.9293 13.6601C19.0194 13.5699 19.1417 13.5193 19.2692 13.5193M19.2692 14.4808C19.3967 14.4808 19.519 14.4302 19.6092 14.34C19.6993 14.2499 19.75 14.1276 19.75 14.0001C19.75 13.8725 19.6993 13.7503 19.6092 13.6601C19.519 13.5699 19.3967 13.5193 19.2692 13.5193"
             stroke="#449A46"
             strokeWidth="1.71429"
             strokeLinecap="round"
