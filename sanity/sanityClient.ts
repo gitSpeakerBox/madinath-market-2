@@ -22,10 +22,14 @@ export function urlFor(source: SanityImageSource) {
 
 // --- Typed fetch helpers ---
 
+async function sanityFetch(query, params = {}) {
+  return client.fetch(query, params, { cache: 'no-store' });
+}
+
 /** Fetch all active hero slides, sorted by order */
 export async function getHeroSlides() {
-  return client.fetch(
-    `*[_type == "heroSlide" && isActive == true] | order(order asc) {
+  return sanityFetch(
+    `*[_type == "heroSlide" && isActive == true] | order(orderRank) {
       _id,
       title,
       order,
@@ -43,8 +47,8 @@ export async function getBranches(countryName?: string) {
     ? `*[_type == "branch" && isActive == true && country->name == $countryName]`
     : `*[_type == "branch" && isActive == true]`;
 
-  return client.fetch(
-    `${filter} | order(order asc) {
+  return sanityFetch(
+    `${filter} | order(orderRank) {
       _id,
       name,
       type,
@@ -63,8 +67,8 @@ export async function getBranches(countryName?: string) {
 
 /** Fetch featured products for homepage */
 export async function getFeaturedProducts() {
-  return client.fetch(
-    `*[_type == "product" && isActive == true && featured == true] | order(order asc) {
+  return sanityFetch(
+    `*[_type == "product" && isActive == true && featured == true] | order(orderRank) {
       _id,
       title,
       slug,
@@ -79,8 +83,8 @@ export async function getFeaturedProducts() {
 
 /** Fetch all active products */
 export async function getAllProducts() {
-  return client.fetch(
-    `*[_type == "product" && isActive == true] | order(order asc) {
+  return sanityFetch(
+    `*[_type == "product" && isActive == true] | order(orderRank) {
       _id,
       title,
       "slug": slug.current,
@@ -95,7 +99,7 @@ export async function getAllProducts() {
 
 /** Fetch a single product by slug */
 export async function getProductBySlug(slug: string) {
-  return client.fetch(
+  return sanityFetch(
     `*[_type == "product" && slug.current == $slug && isActive == true][0] {
       _id,
       title,
@@ -112,7 +116,7 @@ export async function getProductBySlug(slug: string) {
 
 /** Fetch the singleton contact info document */
 export async function getContactInfo() {
-  return client.fetch(
+  return sanityFetch(
     `*[_type == "contactInfo"][0] {
       poBox,
       telephone,
@@ -128,8 +132,8 @@ export async function getContactInfo() {
 
 /** Fetch all active gallery images */
 export async function getGalleryImages() {
-  return client.fetch(
-    `*[_type == "gallery" && isActive == true] | order(order asc) {
+  return sanityFetch(
+    `*[_type == "gallery" && isActive == true] | order(orderRank) {
       _id,
       title,
       image { asset, alt }
@@ -139,8 +143,8 @@ export async function getGalleryImages() {
 
 /** Fetch all active sub brands */
 export async function getSubBrands() {
-  return client.fetch(
-    `*[_type == "subBrand" && isActive == true] | order(order asc) {
+  return sanityFetch(
+    `*[_type == "subBrand" && isActive == true] | order(orderRank) {
       _id,
       title,
       link,
@@ -151,7 +155,7 @@ export async function getSubBrands() {
 
 /** Fetch the hero slider for a specific page (e.g. "about", "news") */
 export async function getPageHero(page: string) {
-  return client.fetch(
+  return sanityFetch(
     `*[_type == "pageHero" && page == $page][0] {
       page,
       slides[] {
@@ -166,7 +170,7 @@ export async function getPageHero(page: string) {
 
 /** Fetch all active news articles */
 export async function getAllNews() {
-  return client.fetch(
+  return sanityFetch(
     `*[_type == "news" && isActive == true] | order(publishedAt desc) {
       _id,
       title,
@@ -180,7 +184,7 @@ export async function getAllNews() {
 
 /** Fetch a single news article by slug */
 export async function getNewsBySlug(slug: string) {
-  return client.fetch(
+  return sanityFetch(
     `*[_type == "news" && slug.current == $slug && isActive == true][0] {
       _id,
       title,
@@ -196,8 +200,8 @@ export async function getNewsBySlug(slug: string) {
 
 /** Fetch all active career listings */
 export async function getCareers() {
-  return client.fetch(
-    `*[_type == "career" && isActive == true] | order(order asc) {
+  return sanityFetch(
+    `*[_type == "career" && isActive == true] | order(orderRank) {
       _id,
       title,
       location,
@@ -210,7 +214,7 @@ export async function getCareers() {
 
 /** Fetch the singleton about page settings */
 export async function getAboutPage() {
-  return client.fetch(
+  return sanityFetch(
     `*[_type == "aboutPage"][0] {
       stats[] {
         "iconUrl": icon.asset->url,

@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const product = defineType({
   name: "product",
@@ -67,25 +68,20 @@ export const product = defineType({
       description: "Show this product in the homepage products section",
       initialValue: false,
     }),
-    defineField({
-      name: "buttonLabel",
-      title: "Button Label",
-      type: "string",
-      description: 'CTA text, e.g. "Shop Now" or "View Products"',
-      initialValue: "Shop Now",
-    }),
-    defineField({
-      name: "buttonLink",
-      title: "Button Link",
-      type: "string",
-      description: "URL path for the CTA button",
-    }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-      initialValue: 1,
-    }),
+    // defineField({
+    //   name: "buttonLabel",
+    //   title: "Button Label",
+    //   type: "string",
+    //   description: 'CTA text, e.g. "Shop Now" or "View Products"',
+    //   initialValue: "Shop Now",
+    // }),
+    // defineField({
+    //   name: "buttonLink",
+    //   title: "Button Link",
+    //   type: "string",
+    //   description: "URL path for the CTA button",
+    // }),
+    orderRankField({ type: "product" }),
     defineField({
       name: "isActive",
       title: "Active",
@@ -93,14 +89,9 @@ export const product = defineType({
       initialValue: true,
     }),
   ],
-  orderings: [
-    {
-      title: "Display Order",
-      name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
-    },
-  ],
+  orderings: [orderRankOrdering],
   preview: {
+  
     select: {
       title: "title",
       subtitle: "category",

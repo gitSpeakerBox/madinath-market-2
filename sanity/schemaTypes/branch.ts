@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const branch = defineType({
   name: "branch",
@@ -77,12 +78,7 @@ export const branch = defineType({
       type: "image",
       options: { hotspot: true },
     }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-      initialValue: 1,
-    }),
+    orderRankField({ type: "branch" }),
     defineField({
       name: "isActive",
       title: "Active",
@@ -90,13 +86,7 @@ export const branch = defineType({
       initialValue: true,
     }),
   ],
-  orderings: [
-    {
-      title: "Display Order",
-      name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
-    },
-  ],
+  orderings: [orderRankOrdering],
   preview: {
     select: {
       title: "name",

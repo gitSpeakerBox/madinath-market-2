@@ -7,6 +7,7 @@ import Form from "@/components/contact/Form";
 import FeedbackForm from "@/components/Home/FeedbackForm";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import contactHeroImg from "@/assets/images/contact us.png";
+import { getPageHero, getContactInfo, urlFor } from "@/sanity/sanityClient";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -31,26 +32,27 @@ export const metadata: Metadata = {
   },
 };
 
-// Simulated Sanity Data
-const sanityDummyData = {
-  heroSection: {
-    images: [contactHeroImg],
-  },
-};
+const page = async () => {
+  const heroData = await getPageHero("contact");
+  const contactInfo = await getContactInfo();
 
-const page = () => {
+  // Extract URLs from sanity images, fallback to local if not available
+  const sanityHeroImages = heroData?.slides
+    ?.filter((slide: any) => slide?.image?.asset)
+    .map((slide: any) => urlFor(slide.image).url()) || [contactHeroImg];
+
   return (
     <main className="flex min-h-screen flex-col items-center relative bg-white">
       <HeroNavV2 />
 
       {/* Hero Section */}
-      <HeroSectionV2 customImages={sanityDummyData.heroSection.images} hideContent={true} />
+      <HeroSectionV2 customImages={sanityHeroImages} hideContent={true} />
 
       {/* Contact Form Section */}
       <ScrollReveal><Form /></ScrollReveal>
 
       {/* Feedback Form / Info Section */}
-      <ScrollReveal><FeedbackForm /></ScrollReveal>
+      <ScrollReveal><FeedbackForm contactInfo={contactInfo} /></ScrollReveal>
 
       <Footer />
     </main>

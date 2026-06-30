@@ -6,7 +6,7 @@ import cartImage from "@/assets/images/cart.svg";
 import { useFormState } from "react-dom";
 import { sendFeedbackForm } from "@/libs/formAction";
 
-const FeedbackForm = () => {
+const FeedbackForm = ({ contactInfo }: { contactInfo?: any }) => {
   const [message, formAction] = useFormState(sendFeedbackForm, null);
   const [error, setError] = useState("");
   const [form, setForm] = useState('Send Message');
@@ -137,10 +137,13 @@ const FeedbackForm = () => {
         <div className="flex flex-col items-center mt-4">
           <h3 className="text-2xl font-bold mb-8 tracking-wide">Contact Info</h3>
           <div className="flex flex-wrap justify-center gap-4">
-            <ContactBadge prefix="PB No:" text="69004, Dubai, U.A.E" href="https://www.google.com/maps/search/?api=1&query=Madinath+Group+69004+Dubai" />
-            <ContactBadge prefix="Tel:" text="+971 4 2643488" href="tel:+97142643488" />
-            <ContactBadge prefix="Fax:" text="+971 4 2643662" href="tel:+97142643662" />
-            <ContactBadge prefix="Email:" text="info@madinathgroup.com" href="mailto:info@madinathgroup.com" />
+            <ContactBadge prefix="PB No:" text={contactInfo?.poBox || "69004, Dubai, U.A.E"} href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactInfo?.poBox || '69004 Dubai')}`} />
+            <ContactBadge prefix="Tel:" text={contactInfo?.telephone || "+971 4 2643488"} href={`tel:${contactInfo?.telephone?.replace(/\s/g, '') || "+97142643488"}`} />
+            <ContactBadge prefix="Fax:" text={contactInfo?.fax || "+971 4 2643662"} href={`tel:${contactInfo?.fax?.replace(/\s/g, '') || "+97142643662"}`} />
+            <ContactBadge prefix="Email:" text={contactInfo?.email || "info@madinathgroup.com"} href={`mailto:${contactInfo?.email || "info@madinathgroup.com"}`} />
+            {contactInfo?.whatsapp && (
+              <ContactBadge prefix="WhatsApp:" text={contactInfo.whatsapp} href={`https://wa.me/${contactInfo.whatsapp.replace(/\D/g, '')}`} />
+            )}
           </div>
         </div>
         

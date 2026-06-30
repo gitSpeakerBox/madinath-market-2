@@ -2,6 +2,7 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schemaTypes";
+import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
@@ -14,7 +15,7 @@ export default defineConfig({
   dataset,
   plugins: [
     structureTool({
-      structure: (S) =>
+      structure: (S, context) =>
         S.list()
           .title("Content")
           .items([
@@ -41,10 +42,12 @@ export default defineConfig({
             S.divider(),
 
             // Home Hero Slides
-            S.listItem()
-              .title("🏠 Home — Hero Slides")
-              .schemaType("heroSlide")
-              .child(S.documentTypeList("heroSlide").title("Home Hero Slides")),
+            orderableDocumentListDeskItem({
+              type: "heroSlide",
+              title: "🏠 Home — Hero Slides",
+              S,
+              context,
+            }),
 
             // Page Hero Sliders (About, News, Gallery, Careers, etc.)
             S.listItem()
@@ -55,10 +58,12 @@ export default defineConfig({
             S.divider(),
 
             // Branches & Locations
-            S.listItem()
-              .title("Branches & Locations")
-              .schemaType("branch")
-              .child(S.documentTypeList("branch").title("Branches")),
+            orderableDocumentListDeskItem({
+              type: "branch",
+              title: "Branches & Locations",
+              S,
+              context,
+            }),
 
             // Countries (for Branches)
             S.listItem()
@@ -69,36 +74,46 @@ export default defineConfig({
             S.divider(),
 
             // Products / Departments
-            S.listItem()
-              .title("Products / Departments")
-              .schemaType("product")
-              .child(S.documentTypeList("product").title("Products")),
+            orderableDocumentListDeskItem({
+              type: "product",
+              title: "Products / Departments",
+              S,
+              context,
+            }),
 
             // News & Events
-            S.listItem()
-              .title("News & Events")
-              .schemaType("news")
-              .child(S.documentTypeList("news").title("News Articles")),
+            orderableDocumentListDeskItem({
+              type: "news",
+              title: "News & Events",
+              S,
+              context,
+            }),
 
             // Careers
-            S.listItem()
-              .title("Careers")
-              .schemaType("career")
-              .child(S.documentTypeList("career").title("Career Listings")),
+            orderableDocumentListDeskItem({
+              type: "career",
+              title: "Careers",
+              S,
+              context,
+            }),
 
             S.divider(),
 
             // Gallery
-            S.listItem()
-              .title("Gallery")
-              .schemaType("gallery")
-              .child(S.documentTypeList("gallery").title("Gallery Images")),
+            orderableDocumentListDeskItem({
+              type: "gallery",
+              title: "Gallery",
+              S,
+              context,
+            }),
 
             // Sub Brands
-            S.listItem()
-              .title("Sub Brands")
-              .schemaType("subBrand")
-              .child(S.documentTypeList("subBrand").title("Sub Brands")),
+            orderableDocumentListDeskItem({
+              type: "subBrand",
+              title: "Sub Brands",
+              S,
+              context,
+            }),
           ]),
     }),
     visionTool(),

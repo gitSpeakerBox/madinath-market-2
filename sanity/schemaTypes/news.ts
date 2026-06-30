@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const news = defineType({
   name: "news",
@@ -48,29 +49,20 @@ export const news = defineType({
       of: [{ type: "block" }, { type: "image" }],
       description: "Full article content for the individual news page",
     }),
+    orderRankField({ type: "news" }),
     defineField({
       name: "isActive",
       title: "Active",
       type: "boolean",
       initialValue: true,
     }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-      initialValue: 1,
-    }),
   ],
   orderings: [
+    orderRankOrdering,
     {
-      title: "Newest First",
+      title: "Published Date (Newest First)",
       name: "publishedAtDesc",
       by: [{ field: "publishedAt", direction: "desc" }],
-    },
-    {
-      title: "Display Order",
-      name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
     },
   ],
   preview: {

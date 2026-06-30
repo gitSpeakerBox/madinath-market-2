@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const subBrand = defineType({
   name: "subBrand",
@@ -32,13 +33,7 @@ export const subBrand = defineType({
       type: "url",
       description: "Optional URL to the brand's website",
     }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-      description: "Lower numbers appear first",
-      initialValue: 1,
-    }),
+    orderRankField({ type: "subBrand" }),
     defineField({
       name: "isActive",
       title: "Active",
@@ -47,13 +42,7 @@ export const subBrand = defineType({
       initialValue: true,
     }),
   ],
-  orderings: [
-    {
-      title: "Display Order",
-      name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
-    },
-  ],
+  orderings: [orderRankOrdering],
   preview: {
     select: {
       title: "title",
@@ -61,7 +50,7 @@ export const subBrand = defineType({
       order: "order",
     },
     prepare({ title, media, order }) {
-      return { title: `#${order} \u2013 ${title}`, media };
+      return { title: `#${order} – ${title}`, media };
     },
   },
 });

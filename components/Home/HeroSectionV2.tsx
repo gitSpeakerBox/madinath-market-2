@@ -85,7 +85,7 @@ const HeroSectionV2 = ({ customImages, hideContent, pageTitle, pageSubtitle }: H
           )}
         </AnimatePresence>
         {/* Darker overlay on inner pages so title text is readable */}
-        <div className={`absolute inset-0 ${hideContent ? "bg-black/50" : "bg-black/30"}`} />
+        <div className={`absolute inset-0 ${hideContent ? "bg-black/50" : "bg-black/40"}`} />
       </div>
 
       {/* ── HOME PAGE: "More for Less" marketing text ── */}

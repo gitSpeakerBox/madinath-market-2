@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const heroSlide = defineType({
   name: "heroSlide",
@@ -27,13 +28,7 @@ export const heroSlide = defineType({
         }),
       ],
     }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-      description: "Lower numbers appear first",
-      initialValue: 1,
-    }),
+    orderRankField({ type: "heroSlide" }),
     defineField({
       name: "isActive",
       title: "Active",
@@ -42,13 +37,7 @@ export const heroSlide = defineType({
       initialValue: true,
     }),
   ],
-  orderings: [
-    {
-      title: "Display Order",
-      name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
-    },
-  ],
+  orderings: [orderRankOrdering],
   preview: {
     select: {
       title: "title",

@@ -9,7 +9,7 @@ import Footer from "@/components/ui/Footer";
 import HeroNavV2 from "@/components/ui/HeroNavV2";
 import OurBrands from "@/components/Home/OurBrands";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { getSubBrands, getBranches, getHeroSlides, getAllProducts, urlFor } from "@/sanity/sanityClient";
+import { getSubBrands, getBranches, getHeroSlides, getAllProducts, urlFor, getContactInfo } from "@/sanity/sanityClient";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -28,6 +28,7 @@ export default async function Home() {
   const branches = await getBranches();
   const heroSlides = await getHeroSlides();
   const products = await getAllProducts();
+  const contactInfo = await getContactInfo();
 
   // Extract URLs from sanity images
   const sanityHeroImages = heroSlides
@@ -42,7 +43,7 @@ export default async function Home() {
       <ScrollReveal><BranchesLocations branches={branches} /></ScrollReveal>
       <ScrollReveal><DepartmentsSection products={products} /></ScrollReveal>
       <ScrollReveal><OurBrands brands={brands} /></ScrollReveal>
-      <ScrollReveal><FeedbackForm /></ScrollReveal>
+      <ScrollReveal><FeedbackForm contactInfo={contactInfo} /></ScrollReveal>
       <ScrollReveal><Form /></ScrollReveal>
       <div className="w-1/2 h-[1.5px] bg-black/30 mx-auto " />
       <Footer />

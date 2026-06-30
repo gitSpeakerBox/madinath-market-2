@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const career = defineType({
   name: "career",
@@ -35,6 +36,7 @@ export const career = defineType({
       type: "url",
       description: "Direct link to apply on LinkedIn",
     }),
+    orderRankField({ type: "career" }),
     defineField({
       name: "isActive",
       title: "Active",
@@ -42,20 +44,8 @@ export const career = defineType({
       initialValue: true,
       description: "Uncheck to hide this listing",
     }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-      initialValue: 1,
-    }),
   ],
-  orderings: [
-    {
-      title: "Display Order",
-      name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
-    },
-  ],
+  orderings: [orderRankOrdering],
   preview: {
     select: { title: "title", subtitle: "location" },
     prepare({ title, subtitle }) {
