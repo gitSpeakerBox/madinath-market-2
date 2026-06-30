@@ -22,7 +22,7 @@ export function urlFor(source: SanityImageSource) {
 
 // --- Typed fetch helpers ---
 
-async function sanityFetch(query, params = {}) {
+async function sanityFetch(query: string, params: Record<string, any> = {}) {
   return client.fetch(query, params, { cache: 'no-store' });
 }
 
