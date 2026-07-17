@@ -16,14 +16,23 @@ interface AboutProps {
     aboutVideoUrl?: string;
     mission?: string;
     vision?: string;
+    chairmanImageUrl?: string;
+    chairmanName?: string;
+    chairmanPosition?: string;
+    chairmanMessage?: string;
   } | null;
 }
+import chairmanFallbackImg from "@/assets/images/chairman.jpeg";
 
 const About = ({ aboutData }: AboutProps) => {
   const stats = aboutData?.stats?.length ? aboutData.stats : defaultStats;
   const mission = aboutData?.mission || "Create a chain of superstores in strategic locations delivering quality, value, service and variety, with convenient opening hours providing our customers with the comfortable shopping experience.";
   const vision = aboutData?.vision || "UAE's value price retailer of choice!! Enhancing customer experience and delivering quality products.";
   const videoSrc = aboutData?.aboutVideoUrl || "/videos/45-year.mp4";
+  const chairmanImageUrl = aboutData?.chairmanImageUrl;
+  const chairmanName = aboutData?.chairmanName || "Usman Ondath";
+  const chairmanPosition = aboutData?.chairmanPosition || "Managing Director";
+  const chairmanMessage = aboutData?.chairmanMessage || "Welcome to Madinath Group. Since our inception, our focus has always been on delivering the highest quality products with exceptional customer service. We are committed to continuing our legacy of excellence and building long-lasting relationships with our valued customers.";
 
   return (
     <>
@@ -150,6 +159,49 @@ const About = ({ aboutData }: AboutProps) => {
               </div>
             </div>
 
+          </div>
+        </div>
+      </div>
+
+      {/* Chairman's Message Section */}
+      <div className="w-full bg-slate-50 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100 relative">
+            {/* Background Decorative Quote Mark */}
+            <div className="absolute top-12 left-12 text-[200px] text-slate-100/50 leading-none font-serif select-none pointer-events-none z-0">
+              &ldquo;
+            </div>
+            
+            <div className="flex flex-col md:flex-row items-center md:items-stretch relative z-10">
+              {/* Chairman Image */}
+              <div className="w-full md:w-2/5 p-8 md:p-12 flex justify-center items-center bg-gradient-to-br from-slate-50 to-slate-100/50">
+                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl">
+                  <Image
+                    src={chairmanImageUrl || chairmanFallbackImg}
+                    alt="Chairman"
+                    fill
+                    className="object-cover object-top hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              </div>
+              
+              {/* Chairman Message */}
+              <div className="w-full md:w-3/5 p-8 md:p-12 md:pl-0 flex flex-col justify-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-mm-red mb-2 tracking-tight">
+                  Chairman&apos;s Message
+                </h2>
+                <div className="w-20 h-1 bg-mm-red/20 mb-8 rounded-full"></div>
+                
+                <div className="text-gray-700 text-lg md:text-xl leading-relaxed font-light italic text-balance mb-6">
+                  &ldquo;{chairmanMessage}&rdquo;
+                </div>
+                
+                <div className="flex flex-col mt-4">
+                  <span className="text-xl font-bold text-gray-900 tracking-tight">{chairmanName}</span>
+                  <span className="text-sm text-gray-500 uppercase tracking-wider font-semibold mt-1">{chairmanPosition}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

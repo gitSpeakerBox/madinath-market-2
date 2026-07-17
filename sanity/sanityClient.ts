@@ -224,7 +224,11 @@ export async function getAboutPage() {
       },
       "aboutVideoUrl": aboutVideo.asset->url,
       mission,
-      vision
+      vision,
+      "chairmanImageUrl": chairmanImage.asset->url,
+      chairmanName,
+      chairmanPosition,
+      chairmanMessage
     }`
   );
 }

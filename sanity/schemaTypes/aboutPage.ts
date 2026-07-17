@@ -60,6 +60,32 @@ export const aboutPage = defineType({
       type: "text",
       rows: 4,
     }),
+    defineField({
+      name: "chairmanImage",
+      title: "Chairman's Image",
+      type: "image",
+      description: "Upload the Chairman's image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "chairmanName",
+      title: "Chairman's Name",
+      type: "string",
+      description: "e.g. Usman Ondath",
+    }),
+    defineField({
+      name: "chairmanPosition",
+      title: "Chairman's Position / Designation",
+      type: "string",
+      description: "e.g. Managing Director",
+    }),
+    defineField({
+      name: "chairmanMessage",
+      title: "Chairman's Message",
+      type: "text",
+      rows: 6,
+      description: "Enter the Chairman's message",
+    }),
   ],
   preview: {
     prepare() {
