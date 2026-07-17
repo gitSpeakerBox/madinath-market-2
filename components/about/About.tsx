@@ -165,7 +165,7 @@ const About = ({ aboutData }: AboutProps) => {
 
       {/* Chairman's Message Section */}
       <div className="w-full bg-slate-50 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100 relative">
             {/* Background Decorative Quote Mark */}
             <div className="absolute top-12 left-12 text-[200px] text-slate-100/50 leading-none font-serif select-none pointer-events-none z-0">
@@ -192,7 +192,7 @@ const About = ({ aboutData }: AboutProps) => {
                 </h2>
                 <div className="w-20 h-1 bg-mm-red/20 mb-8 rounded-full"></div>
                 
-                <div className="text-gray-700 text-lg md:text-xl leading-relaxed font-light italic text-balance mb-6">
+                <div className="text-gray-700 text- leading-relaxed font-light italic text-balance mb-6">
                   &ldquo;{chairmanMessage}&rdquo;
                 </div>
                 
