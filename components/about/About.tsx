@@ -59,7 +59,7 @@ const About = ({ aboutData }: AboutProps) => {
               <h1 className="text-3xl md:text-4xl font-bold text-mm-red tracking-tight">
                 About the Group
               </h1>
-              <div className="text-gray-700 text-sm md:text-base leading-relaxed space-y-4 font-light">
+              <div className="text-gray-700 text-sm md:text-base text-justify leading-relaxed space-y-4 font-light">
                 <p>
                   Madinath Group was established in 1982 to fulfil the market needs for high quality retail
                   solutions. From the rarest foods to the freshest produce, we constantly look for the finest
@@ -164,44 +164,56 @@ const About = ({ aboutData }: AboutProps) => {
       </div>
 
       {/* Chairman's Message Section */}
-      <div className="w-full bg-slate-50 py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100 relative">
-            {/* Background Decorative Quote Mark */}
-            <div className="absolute top-12 left-12 text-[200px] text-slate-100/50 leading-none font-serif select-none pointer-events-none z-0">
-              &ldquo;
-            </div>
-            
-            <div className="flex flex-col md:flex-row items-center md:items-stretch relative z-10">
-              {/* Chairman Image */}
-              <div className="w-full md:w-2/5 p-8 md:p-12 flex justify-center items-center bg-gradient-to-br from-slate-50 to-slate-100/50">
-                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl">
-                  <Image
-                    src={chairmanImageUrl || chairmanFallbackImg}
-                    alt="Chairman"
-                    fill
-                    className="object-cover object-top hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
+      <div className="w-full bg-white py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-4">
+
+          {/* Section Label */}
+          <div className="flex items-center gap-3 mb-12">
+            <div className="w-10 h-[3px] bg-mm-red rounded-full" />
+            <span className="text-mm-red text-xs font-bold uppercase tracking-[0.2em]">Leadership</span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden shadow-2xl border border-slate-100">
+
+            {/* Left: Portrait Card */}
+            <div className="lg:col-span-2 relative min-h-[420px] lg:min-h-0 bg-slate-900">
+              <Image
+                src={chairmanImageUrl || chairmanFallbackImg}
+                alt={chairmanName}
+                fill
+                className="object-cover object-top opacity-90"
+              />
+              {/* Dark gradient overlay from bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+              {/* Name badge pinned to bottom */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                <p className="text-white font-bold text-xl leading-tight tracking-tight">{chairmanName}</p>
+                <p className="text-mm-red text-xs font-semibold uppercase tracking-widest mt-1">{chairmanPosition}</p>
               </div>
-              
-              {/* Chairman Message */}
-              <div className="w-full md:w-3/5 p-8 md:p-12 md:pl-0 flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl font-bold text-mm-red mb-2 tracking-tight">
-                  Chairman&apos;s Message
-                </h2>
-                <div className="w-20 h-1 bg-mm-red/20 mb-8 rounded-full"></div>
-                
-                <div className="text-gray-700 text- leading-relaxed font-light italic text-balance mb-6">
-                  &ldquo;{chairmanMessage}&rdquo;
-                </div>
-                
-                <div className="flex flex-col mt-4">
-                  <span className="text-xl font-bold text-gray-900 tracking-tight">{chairmanName}</span>
-                  <span className="text-sm text-gray-500 uppercase tracking-wider font-semibold mt-1">{chairmanPosition}</span>
-                </div>
-              </div>
+
+              {/* Red accent bar on right edge (desktop only) */}
+              <div className="hidden lg:block absolute top-0 right-0 w-1 h-full bg-mm-red/60" />
             </div>
+
+            {/* Right: Message Panel */}
+            <div className="lg:col-span-3 bg-white flex flex-col justify-center p-8 md:p-12 lg:p-16 relative">
+
+              {/* Giant decorative quote */}
+              <span className="absolute top-6 right-8 text-[120px] md:text-[160px] font-serif text-slate-100 leading-none select-none pointer-events-none">&ldquo;</span>
+
+              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-2 relative z-10">
+                Chairman&apos;s <span className="text-mm-red">Message</span>
+              </h2>
+              <div className="w-16 h-1 bg-mm-red rounded-full mb-8" />
+
+              <blockquote className="relative z-10 text-gray-600 text-base md:text-lg leading-relaxed font-light italic">
+                &ldquo;{chairmanMessage}&rdquo;
+              </blockquote>
+
+
+            </div>
+
           </div>
         </div>
       </div>

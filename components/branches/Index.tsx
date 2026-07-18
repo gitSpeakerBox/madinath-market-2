@@ -43,7 +43,7 @@ const Index = ({ branches = [] }: { branches?: any[] }) => {
         {countries.map((countryName, index) => (
           <div key={countryName} className={`flex flex-col gap-6 ${index > 0 ? "pt-12" : "pt-4"}`}>
             <div className="border border-mm-red px-8 py-2 font-bold text-gray-900 w-max bg-white shadow-sm text-sm tracking-wider uppercase">
-              IN {countryName}
+              IN THE {countryName}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
               {branchesByCountry[countryName].map((val: any, idx: number) => (
@@ -80,7 +80,7 @@ const Index = ({ branches = [] }: { branches?: any[] }) => {
             {/* Modal Content - Scrollable */}
             <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
               <div className="flex flex-col gap-6">
-                
+
                 {/* Header info */}
                 <div>
                   <h2 className="text-3xl font-bold text-mm-red mb-2">{selectedBranch.name}</h2>
@@ -153,7 +153,8 @@ const Index = ({ branches = [] }: { branches?: any[] }) => {
           </div>
         </div>
       )}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .animate-fade-in-up {
           animation: fadeInUp 0.4s ease-out forwards;
         }
