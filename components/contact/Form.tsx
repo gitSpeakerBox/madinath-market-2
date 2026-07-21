@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import SectionWrapper from "../SectionWrapper";
 import EnquiryForm from "./EnquiryForm";
 import Image from "next/image";
-import contactImg1 from "@/assets/images/contact-img-1.jpg";
-import contactImg2 from "@/assets/images/contact-img-2.jpg";
+import contactImg1 from "@/assets/images/home/contact.jpeg";
+import contactImg2 from "@/assets/images/home/contact-1.jpeg";
 
 const Form = () => {
   const [currentImage, setCurrentImage] = useState(0);

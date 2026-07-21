@@ -101,8 +101,8 @@ const About = ({ aboutData }: AboutProps) => {
           {/* Counting Stats Row - Highly responsive grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-8 pb-12">
             {stats.map((stat: any, index: number) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 md:p-6 bg-slate-50/50 hover:bg-slate-50 border border-slate-100 rounded-2xl transition-all duration-300 hover:shadow-md"
               >
                 {/* Icon Container with subtle circle overlay */}
@@ -120,7 +120,7 @@ const About = ({ aboutData }: AboutProps) => {
                     </svg>
                   )}
                 </div>
-                
+
                 <div className="flex flex-col items-center sm:items-start text-center sm:text-left justify-center min-h-[56px]">
                   <span className="text-3xl md:text-4xl font-extrabold text-mm-red tracking-tight leading-none mb-1">
                     <CountUp target={stat.count} suffix={stat.suffix || ""} />
@@ -165,55 +165,56 @@ const About = ({ aboutData }: AboutProps) => {
 
       {/* Chairman's Message Section */}
       <div className="w-full bg-white py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
 
           {/* Section Label */}
-          <div className="flex items-center gap-3 mb-12">
+          <div className="flex items-center gap-3 mb-10">
             <div className="w-10 h-[3px] bg-mm-red rounded-full" />
             <span className="text-mm-red text-xs font-bold uppercase tracking-[0.2em]">Leadership</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden shadow-2xl border border-slate-100">
+          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 p-8 md:p-12 lg:p-16 relative overflow-hidden">
 
-            {/* Left: Portrait Card */}
-            <div className="lg:col-span-2 relative min-h-[420px] lg:min-h-0 bg-slate-900">
-              <Image
-                src={chairmanImageUrl || chairmanFallbackImg}
-                alt={chairmanName}
-                fill
-                className="object-cover object-top opacity-90"
-              />
-              {/* Dark gradient overlay from bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-              {/* Name badge pinned to bottom */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                <p className="text-white font-bold text-xl leading-tight tracking-tight">{chairmanName}</p>
-                <p className="text-mm-red text-xs font-semibold uppercase tracking-widest mt-1">{chairmanPosition}</p>
-              </div>
-
-              {/* Red accent bar on right edge (desktop only) */}
-              <div className="hidden lg:block absolute top-0 right-0 w-1 h-full bg-mm-red/60" />
-            </div>
-
-            {/* Right: Message Panel */}
-            <div className="lg:col-span-3 bg-white flex flex-col justify-center p-8 md:p-12 lg:p-16 relative">
-
-              {/* Giant decorative quote */}
-              <span className="absolute top-6 right-8 text-[120px] md:text-[160px] font-serif text-slate-100 leading-none select-none pointer-events-none">&ldquo;</span>
-
-              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-2 relative z-10">
+            {/* Title at the Top */}
+            <div className="mb-10 relative z-10">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
                 Chairman&apos;s <span className="text-mm-red">Message</span>
               </h2>
-              <div className="w-16 h-1 bg-mm-red rounded-full mb-8" />
-
-              <blockquote className="relative z-10 text-gray-600 text-base md:text-lg leading-relaxed font-light italic">
-                &ldquo;{chairmanMessage}&rdquo;
-              </blockquote>
-
-
+              <div className="w-20 h-1.5 bg-mm-red rounded-full" />
             </div>
 
+            <div className="flex flex-col lg:flex-row gap-10 lg:gap-10 relative z-10 items-start">
+
+              {/* Left: Portrait Card */}
+              <div className="w-full flex flex-col gap-1 lg:w-[30%] shrink-0">
+                <div className="relative w-full h-[350px] md:h-[450px] lg:h-[400px] rounded-2xl overflow-hidden bg-slate-900 shadow-lg group">
+                  <Image
+                    src={chairmanImageUrl || chairmanFallbackImg}
+                    alt={chairmanName}
+                    fill
+                    className="object-cover object-top opacity-95 transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+
+                </div>
+                <div className=" bottom-0 left-0 right-0">
+                  <p className="text-black font-bold text-2xl leading-tight tracking-tight mb-1">{chairmanName}</p>
+                  <p className="text-mm-red text-sm font-bold uppercase tracking-widest">{chairmanPosition}</p>
+                </div>
+              </div>
+
+              {/* Right: Message Panel */}
+              <div className="w-full lg:w-[65%] flex flex-col relative pt-4">
+                <span className="absolute -top-16 -left-8 text-[120px] md:text-[180px] font-serif text-slate-100/80 leading-none select-none pointer-events-none">&ldquo;</span>
+
+                <div className="relative z-10">
+                  <blockquote className="text-gray-700 text-lg md:text-xl leading-relaxed font-light italic">
+                    &ldquo;{chairmanMessage}&rdquo;
+                  </blockquote>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>

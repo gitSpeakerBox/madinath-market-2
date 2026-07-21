@@ -43,7 +43,7 @@ const Index = ({ branches = [] }: { branches?: any[] }) => {
         {countries.map((countryName, index) => (
           <div key={countryName} className={`flex flex-col gap-6 ${index > 0 ? "pt-12" : "pt-4"}`}>
             <div className="border border-mm-red px-8 py-2 font-bold text-gray-900 w-max bg-white shadow-sm text-sm tracking-wider uppercase">
-              IN THE {countryName}
+              IN {countryName}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
               {branchesByCountry[countryName].map((val: any, idx: number) => (

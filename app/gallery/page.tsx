@@ -7,6 +7,7 @@ import HeroSectionV2 from "@/components/Home/HeroSectionV2";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { getGalleryImages, getPageHero, urlFor } from "@/sanity/sanityClient";
 import HeroImg from "@/assets/images/home/hero/img-1.png";
+import GalleryGrid from "@/components/ui/GalleryGrid";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -65,56 +66,14 @@ export default async function GalleryPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            {galleryImages && galleryImages.length > 0 ? (
-              galleryImages.map((item: any) => (
-                <div key={item._id} className="w-full relative h-[300px] md:h-[400px] rounded-[24px] overflow-hidden shadow-sm">
-                  <Image
-                    src={urlFor(item.image).url()}
-                    alt={item.image.alt || item.title || "Gallery Image"}
-                    fill
-                    className="object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                </div>
-              ))
-            ) : (
-              // Dummy content if no Sanity data
-              <>
-                <div className="w-full relative h-[300px] md:h-[400px] rounded-[24px] overflow-hidden shadow-sm">
-                  <Image
-                    src={HeroImg}
-                    alt="Gallery placeholder"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="w-full relative h-[300px] md:h-[400px] rounded-[24px] overflow-hidden shadow-sm">
-                  <Image
-                    src={HeroImg}
-                    alt="Gallery placeholder"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="w-full relative h-[300px] md:h-[400px] rounded-[24px] overflow-hidden shadow-sm">
-                  <Image
-                    src={HeroImg}
-                    alt="Gallery placeholder"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="w-full relative h-[300px] md:h-[400px] rounded-[24px] overflow-hidden shadow-sm">
-                  <Image
-                    src={HeroImg}
-                    alt="Gallery placeholder"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </>
-            )}
-          </div>
+          <GalleryGrid 
+            images={galleryImages?.map((item: any) => ({
+              _id: item._id,
+              url: urlFor(item.image).url(),
+              alt: item.image.alt || item.title || "Gallery Image"
+            })) || []}
+            dummyImage={HeroImg}
+          />
         </section>
       </ScrollReveal>
 
