@@ -208,7 +208,7 @@ const About = ({ aboutData }: AboutProps) => {
                 <span className="absolute -top-16 -left-8 text-[120px] md:text-[180px] font-serif text-slate-100/80 leading-none select-none pointer-events-none">&ldquo;</span>
 
                 <div className="relative z-10">
-                  <blockquote className="text-gray-700 text-lg md:text-xl leading-relaxed font-light italic">
+                  <blockquote className="text-gray-700 md:text-lg leading-relaxed font-light">
                     &ldquo;{chairmanMessage}&rdquo;
                   </blockquote>
                 </div>
